@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Julianna Lacaden — Portfolio</title>
+    <meta
+      name="description"
+      content="Julianna Lacaden — BS Computer Science student at Saint Louis University building web, desktop, and agentic AI systems."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%2710%27 fill=%27%233b5bfd%27/%3E%3Ctext x=%2716%27 y=%2721%27 font-family=%27Arial%27 font-weight=%27700%27 font-style=%27italic%27 font-size=%2714%27 fill=%27white%27 text-anchor=%27middle%27%3EJL%3C/text%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <nav class="nav" id="nav" aria-label="Main">
+      <ul class="nav__links" id="nav-links">
+        <li><a href="#projects" data-section="projects">Projects</a></li>
+        <li><a href="#about" data-section="about">About</a></li>
+        <li><a href="#beyond" data-section="beyond">Beyond</a></li>
+      </ul>
+      <a class="nav__brand" href="#top">Julianna Lacaden</a>
+      <button class="nav__toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+        <i data-lucide="menu" aria-hidden="true"></i>
+      </button>
+    </nav>
+
+    <main class="page" id="top">
+      <section class="hero" aria-label="Introduction">
+        <div class="card glow glow--pink hero__main">
+          <p class="label label--pink">Available for projects</p>
+          <h1 class="hero__title">
+            Building systems that <span class="marker">quietly</span> get the work
+            <span class="accent-italic">done.</span>
+          </h1>
+          <p class="hero__bio" id="hero-bio"></p>
+        </div>
+
+        <aside class="card glow glow--blue profile" aria-label="Profile">
+          <div class="blob" id="profile-initials"></div>
+          <p class="profile__name" id="profile-name"></p>
+          <p class="label" id="profile-location"></p>
+          <div class="profile__links" id="profile-links"></div>
+        </aside>
+      </section>
+
+      <section class="section" id="projects">
+        <div class="section-head">
+          <h2>Selected Works</h2>
+          <span class="rule"></span>
+          <span class="label">02 / Gallery</span>
+        </div>
+        <div class="works" id="works"></div>
+      </section>
+
+      <section class="section about" id="about">
+        <div class="card glow glow--orange">
+          <p class="label label--orange">03 / About me</p>
+          <p class="about__quote">
+            I build systems — from <span class="word">solar</span> proposal software to
+            <span class="marker marker--orange">AI agents.</span>
+          </p>
+          <div class="about__text" id="about-text"></div>
+        </div>
+        <div class="card">
+          <p class="label label--green">Technical toolkit</p>
+          <div class="toolkit" id="toolkit"></div>
+        </div>
+      </section>
+
+      <section class="section" id="beyond">
+        <div class="card beyond">
+          <div class="section-head">
+            <h2>Beyond Class</h2>
+            <span class="rule"></span>
+            <span class="label">04 / Timeline</span>
+          </div>
+          <ol class="timeline" id="timeline"></ol>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div>
+          <h2>Let's create.</h2>
+          <p class="label" id="footer-meta"></p>
+        </div>
+        <div class="footer__links" id="footer-links"></div>
+      </footer>
+    </main>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/lucide@1.49.0/dist/umd/lucide.min.js"
+      integrity="sha384-7mWwAGEOOlxvEBR+Mpy0eVhGL+9abGHkZtVoTs+dvrWkI5g00lyMaAxRIK+rqXGt"
+      crossorigin="anonymous"
+    ></script>
+    <script src="js/data.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/home.js"></script>
+  </body>
+</html>
