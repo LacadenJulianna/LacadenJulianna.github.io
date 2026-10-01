@@ -1,12 +1,5 @@
 /* Homepage: builds every data-driven block from data.js, then wires the nav. */
 
-const TAG_COLORS = {
-  Leadership: 'var(--yellow)',
-  Hackathon: 'var(--pink)',
-  Competition: 'var(--orange)',
-  License: 'var(--green)',
-};
-
 function renderProfile() {
   document.getElementById('hero-bio').textContent = PROFILE.bio;
   document.getElementById('profile-initials').textContent = PROFILE.initials;
@@ -29,9 +22,19 @@ function renderProfile() {
 
 function renderWorks() {
   const grid = document.getElementById('works');
+  let textRun = 0; // text-only cards since the last full-width card
   PROJECTS.forEach((project, i) => {
-    // Projects with screenshots get a full-width "feature" card.
-    const className = project.gallery ? 'card work work--feature' : 'card work';
+    // Projects with images get a full-width "feature" card. Text cards sit in
+    // pairs; one left without a partner spans the row instead of leaving a gap.
+    let className = 'card work';
+    if (project.gallery) {
+      className += ' work--feature';
+      textRun = 0;
+    } else {
+      textRun++;
+      const nextIsFullWidth = !PROJECTS[i + 1] || PROJECTS[i + 1].gallery;
+      if (nextIsFullWidth && textRun % 2 === 1) className += ' work--wide';
+    }
     const card = el('a', { className, attrs: { href: `project.html?id=${project.id}` } }, [
       el('div', { className: 'work__top' }, [
         el('span', { className: 'label label--yellow', text: `${pad2(i + 1)} / ${project.category}` }),
@@ -39,7 +42,7 @@ function renderWorks() {
       ]),
       project.gallery
         ? el('div', { className: 'work__shot' }, [
-            el('img', { attrs: { src: project.gallery[0], alt: `${project.title} screenshot`, loading: 'lazy' } }),
+            el('img', { attrs: { src: project.cover || project.gallery[0], alt: `${project.title} ${(project.galleryLabel || 'screenshot').toLowerCase()}`, loading: 'lazy' } }),
           ])
         : null,
       el('h3', { text: project.title }),
@@ -67,17 +70,67 @@ function renderTimeline() {
   EXTRACURRICULAR.forEach((entry) => {
     const pill = el('span', { className: 'pill', text: entry.year });
     pill.style.color = TAG_COLORS[entry.tag] || 'var(--muted)';
-    list.append(
-      el('li', { className: 'timeline__row' }, [
-        pill,
-        el('div', {}, [
-          el('p', { className: 'timeline__title', text: entry.title }),
-          el('p', { className: 'tag', text: `${entry.org} · ${entry.date}` }),
-        ]),
-        el('span', { className: 'badge', text: entry.result }),
-      ])
-    );
+    const row = el('a', { className: 'timeline__row', attrs: { href: `activity.html?id=${entry.id}` } }, [
+      pill,
+      el('div', {}, [
+        el('p', { className: 'timeline__title', text: entry.title }),
+        el('p', { className: 'tag', text: `${entry.org} · ${entry.date}` }),
+      ]),
+      el('span', { className: 'badge', text: entry.result }),
+    ]);
+    row.dataset.activity = entry.id;
+    list.append(el('li', {}, [row]));
   });
+}
+
+/*
+ * Floating preview card that follows the cursor over Beyond Class rows.
+ * Shows the first picture (if any) and the description. Skipped on touch
+ * screens, where rows just open their page on tap.
+ */
+function setupTimelinePreview() {
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+  const card = el('div', { className: 'preview', attrs: { 'aria-hidden': 'true' } });
+  document.body.append(card);
+  const byId = Object.fromEntries(EXTRACURRICULAR.map((a) => [a.id, a]));
+  const OFFSET = 20;
+  let frame = 0;
+
+  function fill(activity) {
+    const picture = activity.images?.[0] || activity.banner;
+    const parts = [
+      picture ? el('img', { className: 'preview__img', attrs: { src: picture, alt: '' } }) : null,
+      el('p', { className: 'preview__text', text: activity.description || `${activity.org} · ${activity.date}` }),
+      el('span', { className: 'label label--yellow', text: 'View details →' }),
+    ];
+    card.replaceChildren(...parts.filter(Boolean)); // replaceChildren would print "null"
+  }
+
+  function move(x, y) {
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(() => {
+      const { width, height } = card.getBoundingClientRect();
+      // Flip to the other side of the cursor near the right/bottom edges.
+      const left = x + OFFSET + width > window.innerWidth ? x - OFFSET - width : x + OFFSET;
+      const top = y + OFFSET + height > window.innerHeight ? y - OFFSET - height : y + OFFSET;
+      card.style.transform = `translate(${Math.max(8, left)}px, ${Math.max(8, top)}px)`;
+    });
+  }
+
+  document.querySelectorAll('.timeline__row').forEach((row) => {
+    row.addEventListener('mouseenter', (e) => {
+      fill(byId[row.dataset.activity]);
+      card.classList.add('is-visible');
+      move(e.clientX, e.clientY);
+    });
+    row.addEventListener('mousemove', (e) => {
+      card.classList.add('is-visible'); // re-show after a scroll hid it
+      move(e.clientX, e.clientY);
+    });
+    row.addEventListener('mouseleave', () => card.classList.remove('is-visible'));
+  });
+  window.addEventListener('scroll', () => card.classList.remove('is-visible'), { passive: true });
 }
 
 function renderFooter() {
@@ -123,6 +176,7 @@ renderProfile();
 renderWorks();
 renderAbout();
 renderTimeline();
+setupTimelinePreview();
 renderFooter();
 setupScrollSpy();
 setupMobileMenu();

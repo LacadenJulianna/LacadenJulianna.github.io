@@ -13,10 +13,6 @@ const OWNER_ICONS = {
   research: 'file-text',
 };
 
-function backLink(href, text) {
-  return el('a', { className: 'back', attrs: { href } }, [icon('arrow-left'), document.createTextNode(text)]);
-}
-
 function renderNotFound(root) {
   document.title = 'Project not found — Julianna Lacaden';
   root.append(
@@ -101,7 +97,11 @@ function renderContent(project) {
       ),
     ]),
     project.architecture ? renderOwnership(project.architecture) : null,
-    project.gallery ? section('Screenshots', [renderGallery(project.gallery, project.title)]) : null,
+    project.gallery
+      ? section(project.galleryLabel || 'Screenshots', [
+          renderGallery(project.gallery, `${project.title} ${(project.galleryLabel || 'screenshot').toLowerCase()}`),
+        ])
+      : null,
     el('section', { className: 'card challenge' }, [
       el('span', { className: 'label label--yellow', text: 'Key challenge' }),
       el('p', { text: project.keyChallenge }),

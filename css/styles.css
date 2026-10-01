@@ -395,6 +395,14 @@ p {
   object-position: top;
 }
 
+.work--wide {
+  grid-column: 1 / -1;
+}
+
+.work--wide .work__summary {
+  max-width: 75ch;
+}
+
 .work--feature {
   grid-column: 1 / -1;
   display: grid;
@@ -502,17 +510,94 @@ p {
   padding: 0;
 }
 
+.timeline li {
+  border-bottom: 1px solid var(--line);
+}
+
+.timeline li:last-child {
+  border-bottom: 0;
+}
+
 .timeline__row {
   display: grid;
   grid-template-columns: 64px 1fr auto;
   align-items: center;
   gap: 18px;
   padding: 18px 8px;
+  border-radius: 10px;
+  transition: background-color 0.2s;
+}
+
+.timeline__row:hover {
+  background: var(--card-2);
+}
+
+.timeline__row:hover .timeline__title {
+  color: var(--yellow);
+}
+
+/* hover preview that follows the cursor (home.js) */
+.preview {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 30;
+  width: 280px;
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  background: var(--card-2);
+  border: 1px solid var(--line-2);
+  border-radius: 14px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+  opacity: 0;
+  scale: 0.96;
+  transition: opacity 0.15s, scale 0.15s;
+}
+
+.preview.is-visible {
+  opacity: 1;
+  scale: 1;
+}
+
+.preview__img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.preview__text {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--heading);
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.activity-badge {
+  justify-self: start;
+}
+
+/* doubled class so it beats .detail-head's padding, which comes later */
+.detail-head.detail-head--banner {
+  padding: 0;
+  gap: 0;
+}
+
+.detail-head__banner {
+  width: 100%;
+  height: auto;
   border-bottom: 1px solid var(--line);
 }
 
-.timeline__row:last-child {
-  border-bottom: 0;
+.detail-head__body {
+  display: grid;
+  gap: 18px;
+  padding: 32px 36px 36px;
 }
 
 .pill {
@@ -626,7 +711,7 @@ p {
   line-height: 1.02;
   text-transform: uppercase;
   letter-spacing: -0.04em;
-  max-width: 18ch;
+  text-align: justify;
   position: relative;
 }
 
@@ -986,6 +1071,14 @@ p {
   .card,
   .hero__main,
   .detail-head {
+    padding: 22px;
+  }
+
+  .detail-head.detail-head--banner {
+    padding: 0;
+  }
+
+  .detail-head__body {
     padding: 22px;
   }
 

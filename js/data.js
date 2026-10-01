@@ -8,6 +8,8 @@
  *                type: ui | logic | database | model | cloud | deployment |
  *                      auth | analytics | hardware | research
  *   gallery     (optional) screenshot paths; shows the carousel
+ *   galleryLabel (optional) carousel heading; defaults to "Screenshots"
+ *   cover       (optional) image for the homepage card; defaults to gallery[0]
  *   repoUrl     (optional) adds a "View on GitHub" link
  */
 
@@ -38,54 +40,94 @@ const SKILLS = [
   { group: 'Soft Skills', items: ['Problem Solving', 'Critical Thinking', 'Collaboration', 'Research'] },
 ];
 
+/*
+ * Beyond Class fields:
+ *   id          used in the URL: activity.html?id=<id>
+ *   description (optional) the "What" text; also shown in the hover preview
+ *   banner      (optional) event banner shown at the top of the activity page
+ *   images      (optional) your own photo paths, e.g. ['assets/activities/amd-1.jpg'];
+ *               shown in a Pictures carousel. The hover preview uses the
+ *               first photo, or the banner if there are no photos
+ */
 const EXTRACURRICULAR = [
   {
+    id: 'next-gen-2026',
+    year: '2026',
+    date: 'September 18–20, 2026',
+    tag: 'Hackathon',
+    title: 'The Next Gen 2026 — Coding the Future of Philippine Collegiate Esports',
+    org: 'CCEPlay · Philippine Collegiate Championship',
+    result: '1st Runner-Up',
+    description:
+      'Competed in a team of four in a 3-day onsite hackathon, building a digital solution for the Philippine collegiate esports ecosystem, and placed 1st Runner-Up.',
+    banner: 'assets/activities/banners/next-gen-2026.webp',
+  },
+  {
+    id: 'auditor-slu-ic',
     year: '2026',
     date: '2026 – 2027',
     tag: 'Leadership',
     title: 'Auditor, SLU Integrated Confederacy',
     org: 'Saint Louis University',
     result: 'Auditor',
+    description:
+      "Conduct periodic, independent audits of ICON's financial records and the Treasurer's statements, submit timely audit reports, and recommend corrective measures to keep the organization's finances accurate, transparent, and accountable.",
   },
   {
+    id: 'secretary-slu-sicap',
     year: '2026',
     date: '2026 – 2027',
     tag: 'Leadership',
     title: 'Secretary for Operations, SLU Society of Integrated Commercians for Academic Progress',
     org: 'Saint Louis University',
     result: 'Secretary',
+    description:
+      "Serve as backup to the Secretary-General, manage the organization's calendar and backup files, lead documentation and officer scheduling for the operations department, and assist the Secretary-General and Vice President for Operations.",
   },
   {
+    id: 'amd-hackathon',
     year: '2026',
     date: 'July 2026',
     tag: 'Hackathon',
     title: 'AMD Developer Hackathon (Act II) — Track 1',
     org: 'AMD',
     result: '36/36 Tests Passing',
+    description:
+      'Owned local/cloud model integration for a cost-aware LLM router on Team "Token Gate," judged on an accuracy gate then ranked by cloud token efficiency.',
+    banner: 'assets/activities/banners/amd-hackathon.avif',
   },
   {
+    id: 'business-manager-slu-ic',
     year: '2025',
     date: '2025 – 2026',
     tag: 'Leadership',
     title: 'Business Manager, SLU Integrated Confederacy',
     org: 'Saint Louis University',
     result: 'Business Manager',
+    description:
+      'Oversee organizational budgeting and resource allocation, maintain financial documentation, and support event planning and member engagement initiatives.',
   },
   {
+    id: 'civil-service',
     year: '2025',
     date: 'August 2025',
     tag: 'License',
     title: 'Civil Service Eligibility',
     org: 'CSC Regional Office CAR',
     result: 'Professional',
+    description: 'Career Service Examination — Pen and Paper Test, Professional level.',
   },
   {
+    id: 'rainwatt-smart-city',
     year: '2025',
     date: '2025',
     tag: 'Competition',
     title: 'RainWatt — Baguio Smart City Challenge',
     org: 'Baguio Smart City Challenge',
-    result: 'Completed',
+    result: '1st Runner-Up',
+    description:
+      'Designed a rain-powered micro-hydropower system as Sustainability Researcher & Engineer, contributing renewable microgeneration research. Our team placed 1st Runner-Up.',
+    banner: 'assets/activities/banners/baguio-smart-city.png',
   },
 ];
 
@@ -113,6 +155,9 @@ const PROJECTS = [
       'As the sole developer, I had to guarantee database integrity for a portable, USB-based system where the drive could be removed at any time. I engineered the transactional stock-deduction workflow under an SQLite WAL journal mode framework and paired it with an automated daily backup engine to eliminate silent backup dropouts.',
     outcome:
       'Delivered a production-ready desktop application covering the full lifecycle — requirements, architecture, development, and deployment — with zero client-side installation friction.',
+    galleryLabel: 'UI Design',
+    cover: 'assets/ecosolergy/02-draft-proposal.png',
+    gallery: ['01-home', '02-draft-proposal', '03-database'].map((f) => `assets/ecosolergy/${f}.png`),
   },
   {
     id: 'seo-audit-skill',
@@ -195,6 +240,13 @@ const PROJECTS = [
     keyChallenge:
       'Formulating stateful bidding logic for a distributed, campus-scale marketplace, then deploying and hardening the full system on a production Ubuntu Server instance while managing database integrity and network traffic optimization.',
     outcome: 'Deployed as a hardened, full-stack system on a secure Ubuntu Server instance for real campus use.',
+    galleryLabel: 'UI Design',
+    cover: 'assets/paybach/02-homepage.png',
+    gallery: [
+      '01-login', '02-homepage', '03-categories', '04-ongoing-bids', '05-ongoing-bids-category',
+      '06-bid-item', '07-bid-top-up', '08-bid-after-top-up', '09-trade-items', '10-trade-item',
+      '11-report-item', '12-report-reasons', '13-help', '14-edit-profile',
+    ].map((f) => `assets/paybach/${f}.png`),
     architecture: [
       { label: 'Client UI (Login, Homepage, Bidding, Listings, Notifications)', owner: 'you', type: 'ui' },
       { label: 'Buy Flow & Bid-Closing Logic', owner: 'team', type: 'logic', note: 'vanjustinne' },
@@ -224,6 +276,12 @@ const PROJECTS = [
     keyChallenge:
       'Implementing role-based access control across multiple account tiers while keeping schedule state synchronized in real time, without compromising accessibility or rendering performance.',
     outcome: 'Delivered an academic project automating lab resource scheduling across university computer laboratories.',
+    galleryLabel: 'UI Design',
+    gallery: [
+      '01-login', '02-request-access', '03-view-labs', '04-select-date', '05-select-time',
+      '06-student-input-details', '07-student-confirm', '08-view-schedules',
+      '09-admin-request-queue', '10-admin-summary-reports', '11-admin-room-schedule',
+    ].map((f) => `assets/lab-reservation/${f}.png`),
     architecture: [
       { label: 'Login Page (front-end)', owner: 'you', type: 'ui' },
       { label: 'Registration & Auth Backend', owner: 'team', type: 'auth', note: 'Ravone Ebeng' },

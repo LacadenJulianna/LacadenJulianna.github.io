@@ -1,10 +1,10 @@
 /*
  * Screenshot carousel with a fullscreen lightbox.
- * renderGallery(images, title) returns the inline carousel element; clicking its
+ * renderGallery(images, altPrefix) returns the inline carousel element; clicking its
  * image opens the #lightbox overlay that lives in project.html.
  */
 
-function renderGallery(images, title) {
+function renderGallery(images, altPrefix) {
   let current = 0;
 
   const img = el('img', { className: 'gallery__img', attrs: { alt: '', tabindex: '0', role: 'button' } });
@@ -18,7 +18,7 @@ function renderGallery(images, title) {
 
   function show(i) {
     current = (i + images.length) % images.length;
-    const alt = `${title} screenshot ${current + 1} of ${images.length}`;
+    const alt = `${altPrefix} ${current + 1} of ${images.length}`;
     const counter = `${current + 1} / ${images.length}`;
     img.src = images[current];
     img.alt = alt;

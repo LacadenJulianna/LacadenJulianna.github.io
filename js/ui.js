@@ -1,4 +1,12 @@
-/* Small DOM helpers shared by home.js and project.js. */
+/* Small DOM helpers shared by the page scripts. */
+
+/* Pill color for each Beyond Class tag. */
+const TAG_COLORS = {
+  Leadership: 'var(--yellow)',
+  Hackathon: 'var(--pink)',
+  Competition: 'var(--orange)',
+  License: 'var(--green)',
+};
 
 /**
  * Create an element. Text is always set with textContent, never innerHTML,
@@ -41,6 +49,11 @@ function githubIcon() {
   );
   svg.append(path);
   return svg;
+}
+
+/** "← Back"-style link used on the detail pages. */
+function backLink(href, text) {
+  return el('a', { className: 'back', attrs: { href } }, [icon('arrow-left'), document.createTextNode(text)]);
 }
 
 /** 0 -> "01" */
