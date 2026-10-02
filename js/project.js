@@ -26,7 +26,7 @@ function renderNotFound(root) {
 }
 
 function renderHeader(project, index) {
-  return el('header', { className: 'card glow glow--pink detail-head' }, [
+  return el('header', { className: 'card detail-head' }, [
     el('p', { className: 'label label--yellow', text: `${project.category} · ${project.year}` }),
     el('h1', { text: project.title }),
     el(
@@ -39,6 +39,13 @@ function renderHeader(project, index) {
           className: 'repo-link',
           text: 'View on GitHub ↗',
           attrs: { href: project.repoUrl, target: '_blank', rel: 'noopener' },
+        })
+      : null,
+    project.liveUrl
+      ? el('a', {
+          className: 'repo-link',
+          text: 'View live site ↗',
+          attrs: { href: project.liveUrl, target: '_blank', rel: 'noopener' },
         })
       : null,
     el('span', { className: 'detail-head__num', text: pad2(index + 1), attrs: { 'aria-hidden': 'true' } }),
@@ -146,6 +153,7 @@ function renderProject() {
     el('div', { className: 'detail-body' }, [renderMeta(project), renderContent(project)]),
     renderPager(index)
   );
+  reveal(root.querySelectorAll('.detail-head, .meta, .content > section, .pager'));
 }
 
 renderProject();

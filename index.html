@@ -32,24 +32,27 @@
 
     <main class="page" id="top">
       <section class="hero" aria-label="Introduction">
-        <div class="card glow glow--pink hero__main">
+        <div class="card hero__main" data-accent="pink">
           <p class="label label--pink">Available for projects</p>
           <h1 class="hero__title">
-            Building systems that <span class="marker">quietly</span> get the work
-            <span class="accent-italic">done.</span>
+            <span class="line">Building systems that</span>
+            <span class="line"><span class="marker">quietly</span> get the work</span>
+            <span class="line"><span class="accent-italic">done.</span></span>
           </h1>
           <p class="hero__bio" id="hero-bio"></p>
         </div>
 
-        <aside class="card glow glow--blue profile" aria-label="Profile">
-          <div class="blob" id="profile-initials"></div>
+        <aside class="card profile" data-accent="blue" aria-label="Profile">
+          <div class="portrait" id="profile-portrait">
+            <div class="blob portrait__blob" id="profile-initials"></div>
+          </div>
           <p class="profile__name" id="profile-name"></p>
           <p class="label" id="profile-location"></p>
           <div class="profile__links" id="profile-links"></div>
         </aside>
       </section>
 
-      <section class="section" id="projects">
+      <section class="section" id="projects" data-accent="blue">
         <div class="section-head">
           <h2>Selected Works</h2>
           <span class="rule"></span>
@@ -58,8 +61,8 @@
         <div class="works" id="works"></div>
       </section>
 
-      <section class="section about" id="about">
-        <div class="card glow glow--orange">
+      <section class="section about" id="about" data-accent="orange">
+        <div class="card">
           <p class="label label--orange">03 / About me</p>
           <p class="about__quote">
             I build systems — from <span class="word">solar</span> proposal software to
@@ -67,13 +70,13 @@
           </p>
           <div class="about__text" id="about-text"></div>
         </div>
-        <div class="card">
+        <div class="card" data-accent="green">
           <p class="label label--green">Technical toolkit</p>
           <div class="toolkit" id="toolkit"></div>
         </div>
       </section>
 
-      <section class="section" id="beyond">
+      <section class="section" id="beyond" data-accent="purple">
         <div class="card beyond">
           <div class="section-head">
             <h2>Beyond Class</h2>
@@ -84,7 +87,7 @@
         </div>
       </section>
 
-      <footer class="footer">
+      <footer class="footer" data-accent="green">
         <div>
           <h2>Let's create.</h2>
           <p class="label" id="footer-meta"></p>

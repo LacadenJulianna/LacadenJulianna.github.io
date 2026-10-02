@@ -39,18 +39,28 @@ function renderActivity() {
         el('img', { className: 'detail-head__banner', attrs: { src: activity.banner, alt: `${activity.title} banner` } }),
         el('div', { className: 'detail-head__body' }, headText),
       ])
-    : el('header', { className: 'card glow glow--pink detail-head' }, headText);
+    : el('header', { className: 'card detail-head' }, headText);
 
   const meta = el('aside', { className: 'meta' }, [
     el('dl', {}, [el('dt', { className: 'label', text: 'Where' }), el('dd', { text: activity.org })]),
     el('dl', {}, [el('dt', { className: 'label', text: 'Time' }), el('dd', { text: activity.date })]),
   ]);
 
+  const project = PROJECTS.find((p) => p.id === activity.project);
+
   const content = el('div', { className: 'content' }, [
     activity.description
       ? el('section', {}, [
           el('span', { className: 'label label--yellow', text: 'What' }),
           el('p', { className: 'lead', text: activity.description }),
+        ])
+      : null,
+    project
+      ? el('section', {}, [
+          el('span', { className: 'label label--yellow', text: 'Project' }),
+          el('p', {}, [
+            el('a', { className: 'repo-link', text: `${project.title} →`, attrs: { href: `project.html?id=${project.id}` } }),
+          ]),
         ])
       : null,
     activity.images
@@ -71,6 +81,7 @@ function renderActivity() {
   ]);
 
   root.append(header, el('div', { className: 'detail-body' }, [meta, content]), pager);
+  reveal(root.querySelectorAll('.detail-head, .meta, .content > section, .pager'));
 }
 
 renderActivity();

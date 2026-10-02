@@ -56,6 +56,45 @@ function backLink(href, text) {
   return el('a', { className: 'back', attrs: { href } }, [icon('arrow-left'), document.createTextNode(text)]);
 }
 
+/**
+ * Fade-up elements as they scroll into view, once each. Elements that enter
+ * in the same frame ripple in 60ms apart. Does nothing when the visitor
+ * prefers reduced motion (or the browser lacks IntersectionObserver), so
+ * content is simply shown.
+ */
+function reveal(elements) {
+  const nodes = [...elements].filter(Boolean);
+  if (!nodes.length) return;
+  if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const STEP = 60;
+  const DURATION = 600;
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries
+        .filter((entry) => entry.isIntersecting)
+        .forEach((entry, i) => {
+          const node = entry.target;
+          observer.unobserve(node);
+          const delay = Math.min(i, 6) * STEP;
+          node.style.setProperty('--delay', `${delay}ms`);
+          node.classList.add('is-in');
+          // Drop the reveal classes afterwards so the element's own hover
+          // transitions aren't slowed by the reveal delay.
+          setTimeout(() => {
+            node.classList.remove('reveal', 'is-in');
+            node.style.removeProperty('--delay');
+          }, DURATION + delay + 50);
+        });
+    },
+    { rootMargin: '0px 0px -8% 0px' }
+  );
+  nodes.forEach((node) => {
+    node.classList.add('reveal');
+    observer.observe(node);
+  });
+}
+
 /** 0 -> "01" */
 function pad2(n) {
   return String(n).padStart(2, '0');

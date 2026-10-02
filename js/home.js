@@ -2,7 +2,7 @@
 
 function renderProfile() {
   document.getElementById('hero-bio').textContent = PROFILE.bio;
-  document.getElementById('profile-initials').textContent = PROFILE.initials;
+  renderPortrait();
   document.getElementById('profile-name').textContent = PROFILE.name;
   document.getElementById('profile-location').textContent = PROFILE.location;
 
@@ -18,6 +18,21 @@ function renderProfile() {
     [icon('mail')]
   );
   links.append(github, mail);
+}
+
+// With a cutout photo, the blob becomes a backdrop: one copy of the photo is
+// clipped to the blob (body), a second copy shows only what rises above it (head).
+function renderPortrait() {
+  const blob = document.getElementById('profile-initials');
+  if (!PROFILE.portrait) {
+    blob.textContent = PROFILE.initials;
+    return;
+  }
+  const photo = (extra, alt) =>
+    el('img', { className: `portrait__img${extra}`, attrs: { src: PROFILE.portrait, alt, decoding: 'async' } });
+  document.getElementById('profile-portrait').classList.add('portrait--photo');
+  blob.append(photo('', ''));
+  blob.after(photo(' portrait__img--pop', PROFILE.name));
 }
 
 function renderWorks() {
@@ -55,6 +70,9 @@ function renderWorks() {
 
 function renderAbout() {
   const text = document.getElementById('about-text');
+  if (ABOUT.photo) {
+    document.querySelector('.about__quote').before(el('img', { className: 'about__photo', attrs: { src: ABOUT.photo, alt: PROFILE.name, loading: 'lazy' } }));
+  }
   ABOUT.paragraphs.forEach((p) => text.append(el('p', { text: p })));
 
   const toolkit = document.getElementById('toolkit');
@@ -143,21 +161,38 @@ function renderFooter() {
   links.append(github, email);
 }
 
-/* Highlights the nav link of whichever section is currently in view. */
+/*
+ * Highlights the nav link of whichever section is currently in view, in that
+ * section's accent colour, and slides the underline to it.
+ */
 function setupScrollSpy() {
-  const links = document.querySelectorAll('.nav__links a');
+  const nav = document.getElementById('nav');
+  const list = document.getElementById('nav-links');
+  const links = list.querySelectorAll('a');
   const byId = Object.fromEntries([...links].map((a) => [a.dataset.section, a]));
+  const indicator = el('li', { className: 'nav__indicator', attrs: { 'aria-hidden': 'true' } });
+  list.append(indicator);
+
+  function activate(section) {
+    const link = byId[section.id];
+    if (!link) return;
+    links.forEach((a) => a.classList.remove('is-active'));
+    link.classList.add('is-active');
+    nav.style.setProperty('--nav-accent', getComputedStyle(section).getPropertyValue('--accent-text'));
+    indicator.style.width = `${link.offsetWidth}px`;
+    indicator.style.transform = `translateX(${link.offsetLeft}px)`;
+    indicator.style.opacity = '1';
+  }
+
   const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        links.forEach((a) => a.classList.remove('is-active'));
-        byId[entry.target.id]?.classList.add('is-active');
-      });
-    },
+    (entries) => entries.forEach((entry) => entry.isIntersecting && activate(entry.target)),
     { rootMargin: '-45% 0px -50% 0px' }
   );
   Object.keys(byId).forEach((id) => observer.observe(document.getElementById(id)));
+}
+
+function setupReveal() {
+  reveal(document.querySelectorAll('.section-head, .work, .about > .card, .timeline li, .footer'));
 }
 
 function setupMobileMenu() {
@@ -180,4 +215,5 @@ setupTimelinePreview();
 renderFooter();
 setupScrollSpy();
 setupMobileMenu();
+setupReveal();
 renderIcons();

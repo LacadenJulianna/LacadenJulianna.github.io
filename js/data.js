@@ -11,11 +11,13 @@
  *   galleryLabel (optional) carousel heading; defaults to "Screenshots"
  *   cover       (optional) image for the homepage card; defaults to gallery[0]
  *   repoUrl     (optional) adds a "View on GitHub" link
+ *   liveUrl     (optional) adds a "View live site" link
  */
 
 const PROFILE = {
   name: 'Julianna Lacaden',
-  initials: 'JL',
+  initials: 'JL', // shown in the blob when there's no portrait
+  portrait: 'assets/profile/portrait.webp', // background-removed cutout
   location: 'Baguio City, PH',
   email: 'lacaden.juliannaraine@gmail.com',
   github: 'https://github.com/LacadenJulianna',
@@ -25,6 +27,7 @@ const PROFILE = {
 };
 
 const ABOUT = {
+  photo: 'assets/profile/about.jpg', // optional; shown centered above the quote
   paragraphs: [
     "I'm a fourth-year BS Computer Science student at Saint Louis University in Baguio City. My work spans full-stack web systems, desktop applications, and increasingly, agentic AI tooling.",
     "Recently, I was the sole developer behind EcoSolergy, a zero-install WPF desktop app for solar proposal management, and an AI Engineering Intern building agentic SEO/AEO/GEO audit skills and NLP classifiers. I've also competed in the AMD Developer Hackathon and the Baguio Smart City Challenge.",
@@ -48,6 +51,8 @@ const SKILLS = [
  *   images      (optional) your own photo paths, e.g. ['assets/activities/amd-1.jpg'];
  *               shown in a Pictures carousel. The hover preview uses the
  *               first photo, or the banner if there are no photos
+ *   project     (optional) id of a PROJECTS entry; adds a "Project" link to it.
+ *               Hidden until a project with that id exists
  */
 const EXTRACURRICULAR = [
   {
@@ -59,8 +64,15 @@ const EXTRACURRICULAR = [
     org: 'CCEPlay · Philippine Collegiate Championship',
     result: '1st Runner-Up',
     description:
-      'Competed in a team of four in a 3-day onsite hackathon, building a digital solution for the Philippine collegiate esports ecosystem, and placed 1st Runner-Up.',
+      'Backend Developer for Team "AI\'m Ready," a team of four in a 3-day onsite hackathon, building a digital solution for the Philippine collegiate esports ecosystem. We placed 1st Runner-Up.',
+    project: 'aim-ready',
     banner: 'assets/activities/banners/next-gen-2026.webp',
+    images: [
+      'assets/activities/next-gen-award.jpg',
+      'assets/activities/next-gen-name-card.jpg',
+      'assets/activities/next-gen-working.jpg',
+      'assets/activities/next-gen-prize.jpg',
+    ],
   },
   {
     id: 'auditor-slu-ic',
@@ -120,14 +132,20 @@ const EXTRACURRICULAR = [
   {
     id: 'rainwatt-smart-city',
     year: '2025',
-    date: '2025',
+    date: 'November 2025',
     tag: 'Competition',
     title: 'RainWatt — Baguio Smart City Challenge',
     org: 'Baguio Smart City Challenge',
     result: '1st Runner-Up',
     description:
-      'Designed a rain-powered micro-hydropower system as Sustainability Researcher & Engineer, contributing renewable microgeneration research. Our team placed 1st Runner-Up.',
+      'Designed a rain-powered micro-hydropower system as Sustainability Researcher & Engineer, contributing renewable microgeneration research. Our team placed 1st Runner-Up in the Environmental Innovation category.',
     banner: 'assets/activities/banners/baguio-smart-city.png',
+    images: [
+      'assets/activities/smart-city-awarding.jpg',
+      'assets/activities/smart-city-during.jpg',
+      'assets/activities/smart-city-certificates.jpg',
+      'assets/activities/smart-city-after.jpg',
+    ],
   },
 ];
 
@@ -218,6 +236,52 @@ const PROJECTS = [
       { label: 'Local Model (Ollama)', owner: 'team', type: 'model' },
       { label: 'Docker Deployment', owner: 'team', type: 'deployment' },
     ],
+  },
+  {
+    id: 'aim-ready',
+    title: "ARCHIVe — Team AI'm Ready, The Next Gen 2026",
+    category: 'Hackathon Project',
+    year: 2026,
+    techStack: ['HTML', 'CSS', 'JavaScript', 'Firebase', 'Netlify'],
+    summary:
+      'Gaming-community platform for Philippine collegiate esports that connects players with mentors, parties, and AI career guidance, built at The Next Gen 2026 hackathon.',
+    role: 'Backend Developer',
+    duration: 'September 2026',
+    overviewBody:
+      "Built with Team AI'm Ready at The Next Gen 2026, a 3-day onsite hackathon by CCEPlay and the Philippine Collegiate Championship. ARCHIVe links players' Steam and Riot accounts to show their game stats, then connects them with mentors, parties, and career paths in esports. On a team of four (one frontend, two full-stack, and me as backend), I owned parties and party chat, the AI-assisted career matching, mentor stats and ratings, game trailers, and polishing the buttons across the app.",
+    keyFeatures: [
+      'Parties and party chat, with party creation secured by Firestore security rules',
+      'Career recommendations that blend rule-based scores with an AI model, plus saved answers that cost no tokens on repeat visits',
+      'Mentor stats computed from real data: average rating, success rate, active and finished sessions, and rank among mentors',
+      'Post-session mentor ratings, with mentors ranked by rating on the Gamers page',
+      'Game trailers on each game page, with hover previews on game cards',
+    ],
+    keyChallenge:
+      "Creating a party failed with a permissions error even though the rules looked right. Firestore's get() only sees data from before a batch write, so the rule couldn't see the party being created in the same batch. I rewrote the check with getAfter() and tested it against the Firestore emulator before publishing.",
+    outcome:
+      'Placed 1st Runner-Up (2nd Place, score 92.00) and won PHP 20,000. The platform is deployed live on Netlify.',
+    liveUrl: 'https://archive-aimready.netlify.app/frontend/html/home',
+    architecture: [
+      { label: 'Frontend UI & Page Layouts', owner: 'team', type: 'ui', note: 'Frontend developer' },
+      { label: 'Button Polish Across the App', owner: 'you', type: 'ui' },
+      { label: 'Parties & Party Chat (Firestore + security rules)', owner: 'you', type: 'database' },
+      { label: 'Career Matching with Luna AI', owner: 'you', type: 'model' },
+      { label: 'Mentor Stats & Post-Session Ratings', owner: 'you', type: 'analytics' },
+      { label: 'Game Trailers & Hover Previews', owner: 'you', type: 'ui' },
+      {
+        label: 'Steam & Riot Stats Sync & Tournaments',
+        owner: 'team',
+        type: 'logic',
+        note: 'Full-stack developers',
+      },
+      { label: 'Firebase Auth & Netlify Deployment', owner: 'team', type: 'deployment', note: 'Full-stack developers' },
+    ],
+    galleryLabel: 'Screenshots',
+    cover: 'assets/archive/01-home.jpg',
+    gallery: [
+      '01-home', '02-my-stats', '03-mentor-stats', '04-career', '05-mentor-ratings',
+      '06-game-discovery', '07-game-trailer',
+    ].map((f) => `assets/archive/${f}.jpg`),
   },
   {
     id: 'paybach',
