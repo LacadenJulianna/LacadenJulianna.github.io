@@ -58,8 +58,10 @@ function renderActivity() {
     project
       ? el('section', {}, [
           el('span', { className: 'label label--yellow', text: 'Project' }),
-          el('p', {}, [
-            el('a', { className: 'repo-link', text: `${project.title} →`, attrs: { href: `project.html?id=${project.id}` } }),
+          el('p', { text: project.title }),
+          el('a', { className: 'pill-btn', attrs: { href: `project.html?id=${project.id}` } }, [
+            el('span', { text: 'See project' }),
+            icon('arrow-up-right'),
           ]),
         ])
       : null,
