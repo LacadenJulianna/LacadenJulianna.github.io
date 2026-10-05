@@ -104,6 +104,16 @@ function renderContent(project) {
       ),
     ]),
     project.architecture ? renderOwnership(project.architecture) : null,
+    project.video
+      ? section('Demo', [
+          el('div', { className: 'gallery__stage' }, [
+            el('video', {
+              className: 'gallery__video',
+              attrs: { src: project.video, poster: project.cover || '', controls: '', preload: 'metadata', playsinline: '', 'aria-label': `${project.title} demo video` },
+            }),
+          ]),
+        ])
+      : null,
     project.gallery
       ? section(project.galleryLabel || 'Screenshots', [
           renderGallery(project.gallery, `${project.title} ${(project.galleryLabel || 'screenshot').toLowerCase()}`),

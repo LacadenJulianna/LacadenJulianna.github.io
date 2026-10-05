@@ -276,12 +276,8 @@ const PROJECTS = [
       },
       { label: 'Firebase Auth & Netlify Deployment', owner: 'team', type: 'deployment', note: 'Full-stack developers' },
     ],
-    galleryLabel: 'Screenshots',
     cover: 'assets/archive/01-home.jpg',
-    gallery: [
-      '01-home', '02-my-stats', '03-mentor-stats', '04-career', '05-mentor-ratings',
-      '06-game-discovery', '07-game-trailer',
-    ].map((f) => `assets/archive/${f}.jpg`),
+    video: 'assets/archive/demo.mp4',
   },
   {
     id: 'paybach',

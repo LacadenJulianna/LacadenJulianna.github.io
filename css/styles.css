@@ -1073,6 +1073,12 @@ main[data-accent] .label--yellow {
   cursor: zoom-in;
 }
 
+.gallery__video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
 .gallery__bar {
   display: flex;
   justify-content: space-between;

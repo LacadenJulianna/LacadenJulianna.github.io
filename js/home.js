@@ -39,15 +39,15 @@ function renderWorks() {
   const grid = document.getElementById('works');
   let textRun = 0; // text-only cards since the last full-width card
   PROJECTS.forEach((project, i) => {
-    // Projects with images get a full-width "feature" card. Text cards sit in
+    // Projects with images or a video get a full-width "feature" card. Text cards sit in
     // pairs; one left without a partner spans the row instead of leaving a gap.
     let className = 'card work';
-    if (project.gallery) {
+    if (hasMedia(project)) {
       className += ' work--feature';
       textRun = 0;
     } else {
       textRun++;
-      const nextIsFullWidth = !PROJECTS[i + 1] || PROJECTS[i + 1].gallery;
+      const nextIsFullWidth = !PROJECTS[i + 1] || hasMedia(PROJECTS[i + 1]);
       if (nextIsFullWidth && textRun % 2 === 1) className += ' work--wide';
     }
     const card = el('a', { className, attrs: { href: `project.html?id=${project.id}` } }, [
@@ -55,7 +55,7 @@ function renderWorks() {
         el('span', { className: 'label label--yellow', text: `${pad2(i + 1)} / ${project.category}` }),
         icon('arrow-up-right', 'work__arrow'),
       ]),
-      project.gallery
+      hasMedia(project)
         ? el('div', { className: 'work__shot' }, [
             el('img', { attrs: { src: project.cover || project.gallery[0], alt: `${project.title} ${(project.galleryLabel || 'screenshot').toLowerCase()}`, loading: 'lazy' } }),
           ])
@@ -66,6 +66,10 @@ function renderWorks() {
     ]);
     grid.append(card);
   });
+}
+
+function hasMedia(project) {
+  return Boolean(project.gallery || project.video);
 }
 
 function renderAbout() {
