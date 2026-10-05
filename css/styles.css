@@ -1085,6 +1085,12 @@ main[data-accent] .label--yellow {
 
 /* gallery */
 
+.media-note {
+  margin-bottom: 16px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
 .gallery__stage {
   position: relative;
   border-radius: 12px;

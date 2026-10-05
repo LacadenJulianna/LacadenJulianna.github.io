@@ -30,7 +30,7 @@ const ABOUT = {
   photo: 'assets/profile/about.jpg', // optional; shown centered above the quote
   paragraphs: [
     "I'm a fourth-year BS Computer Science student at Saint Louis University in Baguio City. My work spans full-stack web systems, desktop applications, and increasingly, agentic AI tooling.",
-    "Recently, I was the sole developer behind EcoSolergy, a zero-install WPF desktop app for solar proposal management, and an AI Engineering Intern building agentic SEO/AEO/GEO audit skills and NLP classifiers. I've also competed in the AMD Developer Hackathon and the Baguio Smart City Challenge.",
+    "Recently, I was the sole developer behind EcoSolergy, a zero-install WPF desktop app for solar proposal management, and an AI Engineering Intern building agentic SEO/AEO/GEO audit skills and NLP classifiers. I've also competed in the AMD Developer Hackathon and the Smart City Convergence 2025, where our team placed 1st Runner-Up.",
   ],
 };
 
@@ -134,11 +134,12 @@ const EXTRACURRICULAR = [
     year: '2025',
     date: 'November 2025',
     tag: 'Competition',
-    title: 'RainWatt — Baguio Smart City Challenge',
-    org: 'Baguio Smart City Challenge',
+    title: 'Smart City Convergence 2025',
+    org: 'Smart City Convergence 2025 · Baguio City',
     result: '1st Runner-Up',
     description:
-      'Designed a rain-powered micro-hydropower system as Sustainability Researcher & Engineer, contributing renewable microgeneration research. Our team placed 1st Runner-Up in the Environmental Innovation category.',
+      'Designed RainWatt, a rain-powered micro-hydropower system, as Sustainability Researcher & Engineer, contributing renewable microgeneration research. Our team placed 1st Runner-Up in the Environmental Innovation category.',
+    project: 'rainwatt',
     banner: 'assets/activities/banners/baguio-smart-city.png',
     images: [
       'assets/activities/smart-city-awarding.jpg',
@@ -301,6 +302,7 @@ const PROJECTS = [
       'Formulating stateful bidding logic for a distributed, campus-scale marketplace, then deploying and hardening the full system on a production Ubuntu Server instance while managing database integrity and network traffic optimization.',
     outcome: 'Deployed as a hardened, full-stack system on a secure Ubuntu Server instance for real campus use.',
     galleryLabel: 'UI Design',
+    mediaNote: "There's no screen recording of this project: the live site holds real user data, and I didn't have the authority to record it. These are the UI designs instead.",
     cover: 'assets/paybach/02-homepage.png',
     gallery: [
       '01-login', '02-homepage', '03-categories', '04-ongoing-bids', '05-ongoing-bids-category',
@@ -337,6 +339,7 @@ const PROJECTS = [
       'Implementing role-based access control across multiple account tiers while keeping schedule state synchronized in real time, without compromising accessibility or rendering performance.',
     outcome: 'Delivered an academic project automating lab resource scheduling across university computer laboratories.',
     galleryLabel: 'UI Design',
+    mediaNote: "There's no screen recording of this project: the live system holds real reservation data, and I didn't have the authority to record it. These are the UI designs instead.",
     gallery: [
       '01-login', '02-request-access', '03-view-labs', '04-select-date', '05-select-time',
       '06-student-input-details', '07-student-confirm', '08-view-schedules',
@@ -358,7 +361,7 @@ const PROJECTS = [
     year: 2025,
     techStack: ['Turbine Systems', 'LiFePO4 Battery', 'Sediment Filtration'],
     summary:
-      'Rain-powered micro-hydropower system converting water flow into stored electricity, built for the Baguio Smart City Challenge.',
+      'Rain-powered micro-hydropower system converting water flow into stored electricity, built for the Smart City Convergence 2025.',
     role: 'Sustainability Researcher & Engineer',
     duration: '2025',
     overviewBody:
@@ -372,7 +375,7 @@ const PROJECTS = [
     keyChallenge:
       'Engineering a reliable pipeline from rainwater collection through sediment filtration to turbine generation, ensuring consistent output while contributing to broader sustainability research on renewable microgeneration and water recycling.',
     outcome:
-      'Delivered as part of the Baguio Smart City Challenge, contributing sustainability research on renewable microgeneration and water recycling.',
+      'Our team placed 1st Runner-Up in the Environmental Innovation category at the Smart City Convergence 2025, contributing sustainability research on renewable microgeneration and water recycling.',
     architecture: [
       {
         label: 'Prototype Engineering (turbine assembly, filtration, battery/wiring integration)',

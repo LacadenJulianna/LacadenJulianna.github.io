@@ -116,6 +116,7 @@ function renderContent(project) {
       : null,
     project.gallery
       ? section(project.galleryLabel || 'Screenshots', [
+          project.mediaNote ? el('p', { className: 'media-note', text: project.mediaNote }) : null,
           renderGallery(project.gallery, `${project.title} ${(project.galleryLabel || 'screenshot').toLowerCase()}`),
         ])
       : null,
