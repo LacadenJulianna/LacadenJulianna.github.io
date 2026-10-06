@@ -415,6 +415,7 @@ const PROJECTS = [
     outcome:
       "A polished single-page reference that turns the novel's world-building, magic system, and character web into something browsable and visually rich.",
     repoUrl: 'https://github.com/LacadenJulianna/Babel-Novel-Website',
-    gallery: Array.from({ length: 16 }, (_, i) => `assets/babel/Babel-${i + 1}.png`),
+    cover: 'assets/babel/cover.jpg',
+    video: 'assets/babel/demo.mp4',
   },
 ];
