@@ -472,4 +472,40 @@ const PROJECTS = [
     cover: 'assets/bookworm/cover.jpg',
     video: 'assets/bookworm/demo.mp4',
   },
+  {
+    id: 'whats-the-word',
+    period: { from: '2025-07' },
+    title: "What's the Word — Distributed CORBA Word Game",
+    category: 'Distributed System',
+    year: 2025,
+    techStack: ['Java', 'CORBA', 'MySQL', 'Python', 'omniORB', 'XAMPP'],
+    summary:
+      'A multiplayer, hangman-style word guessing game built on CORBA: a Java game server shared by Java and Python clients, with player accounts, matchmaking, timed rounds, leaderboards and an admin panel backed by MySQL.',
+    role: 'Backend & Java Client Developer',
+    duration: 'July 2025',
+    overviewBody:
+      "Our team's final project for ITCS 222L. Every client talks to one game server through a single CORBA interface (Game.idl) registered with the CORBA Naming Service, so Java and Python clients can play against each other. I built the Java game server — login and sessions, matchmaking, timed rounds, guess checking, wins and leaderboards, admin player management and game settings, all stored in MySQL — and the Java client, a Swing app with the login screen, lobby, live game view, leaderboard and a tabbed admin panel.",
+    keyFeatures: [
+      'One CORBA interface shared by a Java server and both Java and Python clients',
+      'Matchmaking lobby, a countdown, and timed rounds that end on a winner or a timeout',
+      'Per-player guessed letters, wins saved to MySQL, and a top-5 leaderboard',
+      'Admin panel to create, update, delete and search players and to set wait time and round length',
+      'Session takeover: logging in elsewhere signs the old client out and hands over the ongoing game',
+      'Thread-safe server state using ConcurrentHashMap, synchronized game actions and per-game timers',
+    ],
+    keyChallenge:
+      'Letting a player log in from a second client without breaking a game in progress. The server issues a new session token on every login, flags the old session for a forced logout, and returns the ongoing game to the new client so it opens straight into the game, while the old client polls its session status, shows "This account has been logged in from another client" and returns to the login screen. The opponent never notices the switch.',
+    outcome:
+      'A working distributed game where Java and Python clients play on the same server, with persistent accounts and wins, configurable rounds, and seamless switching between clients mid-game.',
+    architecture: [
+      { label: 'Java Swing Client (Player & Admin)', owner: 'you', type: 'ui' },
+      { label: 'Java Game Server & Sessions', owner: 'you', type: 'logic' },
+      { label: 'CORBA IDL Interface', owner: 'team', type: 'logic' },
+      { label: 'Python Client (omniORB)', owner: 'team', type: 'ui' },
+      { label: 'MySQL Database', owner: 'team', type: 'database' },
+    ],
+    repoUrl: 'https://github.com/LacadenJulianna/CORBA',
+    cover: 'assets/whats-the-word/cover.jpg',
+    video: 'assets/whats-the-word/demo.mp4',
+  },
 ];
