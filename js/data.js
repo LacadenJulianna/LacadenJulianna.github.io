@@ -10,6 +10,7 @@
  *   gallery     (optional) screenshot paths; shows the carousel
  *   galleryLabel (optional) carousel heading; defaults to "Screenshots"
  *   cover       (optional) image for the homepage card; defaults to gallery[0]
+ *   tags        filter buttons above the project list (a project can have several)
  *   mediaNote   (optional) grey note above the demo video, or above the gallery
  *               when there's no video
  *   repoUrl     (optional) adds a "View on GitHub" link
@@ -165,6 +166,7 @@ const EXTRACURRICULAR = [
 const PROJECTS = [
   {
     id: 'ecosolergy',
+    tags: ['Desktop'],
     period: { from: '2026-04', to: '2026-06' },
     title: 'EcoSolergy Proposal & Inventory System',
     category: 'Desktop System',
@@ -194,6 +196,7 @@ const PROJECTS = [
   },
   {
     id: 'seo-audit-skill',
+    tags: ['AI'],
     period: { from: '2026-06', to: '2026-07' },
     title: 'Agentic SEO/AEO/GEO Audit Skill',
     category: 'AI / Agentic System',
@@ -219,6 +222,7 @@ const PROJECTS = [
   },
   {
     id: 'token-gate',
+    tags: ['AI', 'Competitions'],
     period: { from: '2026-07' },
     title: 'Token Gate — AMD Developer Hackathon',
     category: 'Hackathon Project',
@@ -256,6 +260,7 @@ const PROJECTS = [
   },
   {
     id: 'aim-ready',
+    tags: ['Web', 'Competitions'],
     period: { from: '2026-09' },
     title: "ARCHIVe — Team AI'm Ready, The Next Gen 2026",
     category: 'Hackathon Project',
@@ -299,6 +304,7 @@ const PROJECTS = [
   },
   {
     id: 'paybach',
+    tags: ['Web'],
     period: { from: '2025-11', to: '2025-12' },
     title: 'Paybach: Bidding & Swapping Marketplace',
     category: 'Marketplace Platform',
@@ -337,6 +343,7 @@ const PROJECTS = [
   },
   {
     id: 'lab-reservation',
+    tags: ['Web'],
     period: { from: '2025-11', to: '2025-12' },
     title: 'Laboratory Reservation System',
     category: 'Academic System',
@@ -375,6 +382,7 @@ const PROJECTS = [
   },
   {
     id: 'rainwatt',
+    tags: ['Hardware', 'Competitions'],
     lang: 'Hardware', // no code, so the language dot says Hardware
     title: 'RainWatt: Rain-Powered Micro-Hydropower',
     category: 'Sustainability Project',
@@ -412,6 +420,7 @@ const PROJECTS = [
   },
   {
     id: 'babel',
+    tags: ['Web'],
     period: { from: '2026-01' },
     title: 'Babel: An Arcane History — Book Companion Site',
     category: 'Web Design Project',
@@ -440,6 +449,7 @@ const PROJECTS = [
   },
   {
     id: 'bookworm',
+    tags: ['Desktop', 'Games'],
     period: { from: '2026-03' },
     title: 'Orthography — A Bookworm-Inspired Recreational Game',
     category: 'Desktop Game',
@@ -476,6 +486,7 @@ const PROJECTS = [
   },
   {
     id: 'whats-the-word',
+    tags: ['Desktop', 'Games'],
     period: { from: '2025-07' },
     title: "What's the Word — Distributed CORBA Word Game",
     category: 'Distributed System',

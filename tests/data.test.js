@@ -42,3 +42,7 @@ test('ARCHIVe and RainWatt get win pills; Token Gate does not', () => {
 test('every video project has a cover poster', () => {
   for (const p of PROJECTS.filter((p) => p.video)) assert.ok(p.cover, p.id);
 });
+
+test('every project has at least one filter tag', () => {
+  for (const p of PROJECTS) assert.ok(Array.isArray(p.tags) && p.tags.length, p.id);
+});

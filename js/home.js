@@ -49,7 +49,44 @@ function winPill(project) {
 function renderWorks() {
   document.getElementById('projects-meta').textContent = `${pad2(PROJECTS.length)} projects`;
   const list = document.getElementById('works');
-  PROJECTS.forEach((project, i) => list.append(project.video ? featureBlock(project, i) : workRow(project, i)));
+  PROJECTS.forEach((project, i) => {
+    const item = project.video ? featureBlock(project, i) : workRow(project, i);
+    item.dataset.tags = (project.tags || []).join('|');
+    list.append(item);
+  });
+}
+
+/* Filter buttons above the project list; "All" plus one per tag in data.js. */
+function renderFilters() {
+  const bar = document.getElementById('filters');
+  const filters = projectFilters(PROJECTS);
+  if (!filters.length) {
+    bar.remove();
+    return;
+  }
+  const items = [...document.getElementById('works').children];
+  const meta = document.getElementById('projects-meta');
+  const button = (label, count, tag) => {
+    const b = el('button', { className: 'filter', attrs: { type: 'button', 'aria-pressed': String(tag === '') } }, [
+      document.createTextNode(label),
+      el('span', { className: 'filter__count', text: String(count) }),
+    ]);
+    b.addEventListener('click', () => {
+      bar.querySelectorAll('.filter').forEach((other) => other.setAttribute('aria-pressed', String(other === b)));
+      let shown = 0;
+      items.forEach((item) => {
+        const match = tag === '' || item.dataset.tags.split('|').includes(tag);
+        item.hidden = !match;
+        if (match) {
+          item.classList.remove('reveal', 'is-in'); // show at once; don't wait for the scroll fade-in
+          shown++;
+        }
+      });
+      meta.textContent = tag === '' ? `${pad2(PROJECTS.length)} projects` : `${pad2(shown)} of ${pad2(PROJECTS.length)} projects`;
+    });
+    return b;
+  };
+  bar.append(button('All', PROJECTS.length, ''), ...filters.map(({ tag, count }) => button(tag, count, tag)));
 }
 
 function workRow(project, i) {
@@ -328,6 +365,7 @@ renderNav({ home: true });
 renderHero();
 renderFacts();
 renderWorks();
+renderFilters();
 renderAbout();
 renderGraph();
 renderTimeline();

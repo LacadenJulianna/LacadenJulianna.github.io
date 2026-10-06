@@ -86,6 +86,13 @@ function techColor(name) {
   return LANG_COLORS[name] || TECH_COLORS[name] || NO_LANG_COLOR;
 }
 
+/** Filter buttons for the project list: each tag once, in first-seen order. */
+function projectFilters(projects) {
+  const counts = new Map();
+  projects.forEach((p) => (p.tags || []).forEach((tag) => counts.set(tag, (counts.get(tag) || 0) + 1)));
+  return [...counts].map(([tag, count]) => ({ tag, count }));
+}
+
 function monthKey(year, month) {
   return `${year}-${String(month).padStart(2, '0')}`;
 }
@@ -150,5 +157,5 @@ function shortTitle(title) {
 }
 
 if (typeof module !== 'undefined') {
-  module.exports = { LANG_COLORS, isWin, winFor, projectLang, techColor, periodMonths, levelFor, buildGraph, shortTitle };
+  module.exports = { LANG_COLORS, isWin, winFor, projectLang, techColor, projectFilters, periodMonths, levelFor, buildGraph, shortTitle };
 }

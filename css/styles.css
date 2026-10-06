@@ -430,8 +430,53 @@ ol {
 
 /* ---------- projects ---------- */
 
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mute);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color var(--fast), border-color var(--fast), background-color var(--fast);
+}
+
+.filter:hover {
+  color: var(--text);
+  border-color: var(--mute);
+}
+
+.filter[aria-pressed='true'] {
+  color: #fff;
+  background: var(--green);
+  border-color: var(--green);
+}
+
+.filter__count {
+  font-size: 10px;
+  letter-spacing: 0;
+  opacity: 0.7;
+}
+
 .works {
   border-top: 1px solid var(--line);
+}
+
+.works > [hidden] {
+  display: none;
 }
 
 /* Shared row hover: a dark-green band with a bright left edge that bleeds

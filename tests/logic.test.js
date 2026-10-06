@@ -1,6 +1,6 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const { isWin, winFor, projectLang, techColor, periodMonths, levelFor, buildGraph, shortTitle } = require('../js/logic.js');
+const { isWin, winFor, projectLang, techColor, projectFilters, periodMonths, levelFor, buildGraph, shortTitle } = require('../js/logic.js');
 
 test('isWin matches podium results only', () => {
   assert.equal(isWin({ result: '1st Runner-Up' }), true);
@@ -74,4 +74,13 @@ test('techColor: languages, other tech, then grey', () => {
   assert.equal(techColor('C#'), '#178600');
   assert.equal(techColor('Docker'), '#2496ed');
   assert.equal(techColor('Problem Solving'), '#7d8590');
+});
+
+test('projectFilters lists each tag once, in first-seen order, with counts', () => {
+  const projects = [{ tags: ['Web', 'Competitions'] }, { tags: ['Desktop'] }, { tags: ['Web'] }, {}];
+  assert.deepEqual(projectFilters(projects), [
+    { tag: 'Web', count: 2 },
+    { tag: 'Competitions', count: 1 },
+    { tag: 'Desktop', count: 1 },
+  ]);
 });
