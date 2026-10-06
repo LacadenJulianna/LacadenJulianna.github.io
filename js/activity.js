@@ -29,7 +29,9 @@ function renderActivity() {
   const header = el('header', { className: 'detail-head' }, [
     el('p', { className: 'label', text: activity.tag }),
     el('h1', { text: activity.title }),
-    el('span', { className: `chip${win ? ' chip--win' : ''}`, text: win ? `🏆 ${activity.result}` : activity.result }),
+    activity.result
+      ? el('span', { className: `chip${win ? ' chip--win' : ''}`, text: win ? `🏆 ${activity.result}` : activity.result })
+      : null,
   ]);
   const banner = activity.banner
     ? el('div', { className: 'detail-banner' }, [el('img', { attrs: { src: activity.banner, alt: `${activity.title} banner` } })])
@@ -54,7 +56,7 @@ function renderActivity() {
           ]),
         ])
       : null,
-    activity.images
+    activity.images && activity.images.length
       ? block(activity.images.length > 1 ? 'Pictures' : 'Picture', [renderGallery(activity.images, `${activity.title} picture`)])
       : null,
   ]);

@@ -8,6 +8,8 @@ test('isWin matches podium results only', () => {
   assert.equal(isWin({ result: '2nd Place' }), true);
   assert.equal(isWin({ result: 'Auditor' }), false);
   assert.equal(isWin({ result: '36/36 Tests Passing' }), false);
+  assert.equal(isWin({ result: 'Championship Finalist' }), false);
+  assert.equal(isWin({ result: 'Placement Exam' }), false);
   assert.equal(isWin({}), false);
 });
 

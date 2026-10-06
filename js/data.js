@@ -19,7 +19,7 @@
 
 const PROFILE = {
   name: 'Julianna Lacaden',
-  initials: 'JL', // shown in the blob when there's no portrait
+  initials: 'JL', // shown in the hero when there's no portrait
   portrait: 'assets/profile/portrait.webp', // background-removed cutout
   location: 'Baguio City, PH',
   email: 'lacaden.juliannaraine@gmail.com',
@@ -32,7 +32,7 @@ const PROFILE = {
 };
 
 const ABOUT = {
-  photo: 'assets/profile/about.jpg', // optional; shown centered above the quote
+  photo: 'assets/profile/about.jpg', // optional; round photo in the About README card
   paragraphs: [
     "I'm a fourth-year BS Computer Science student at Saint Louis University in Baguio City. My work spans full-stack web systems, desktop applications, and increasingly, agentic AI tooling.",
     "Recently, I was the sole developer behind EcoSolergy, a zero-install WPF desktop app for solar proposal management, and an AI Engineering Intern building agentic SEO/AEO/GEO audit skills and NLP classifiers. I've also competed in the AMD Developer Hackathon and the Smart City Convergence 2025, where our team placed 1st Runner-Up.",

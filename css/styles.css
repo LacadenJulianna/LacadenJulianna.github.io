@@ -155,8 +155,8 @@ ol {
 }
 
 .btn--primary:hover {
-  background: #2ea043;
-  border-color: #2ea043;
+  background: var(--green);
+  border-color: var(--green-hi);
 }
 
 .chips {
@@ -688,7 +688,7 @@ ol {
   height: 26px;
   background: var(--panel);
   border-radius: 3px;
-  outline: 1px solid #1f242c;
+  outline: 1px solid var(--line);
   outline-offset: -1px;
 }
 
@@ -708,7 +708,7 @@ ol {
   background: var(--graph-4);
 }
 
-.graph__cell--future {
+.graph__cell--future:not([tabindex]) {
   background: transparent;
   outline: 1px dashed var(--line);
 }
@@ -905,6 +905,7 @@ ol {
   margin-top: 96px;
   padding-block: 48px 26px;
   background: var(--green-deep);
+  color: var(--text);
   border-top: 1px solid var(--green);
 }
 
@@ -1119,6 +1120,10 @@ ol {
 .owner--you {
   background: var(--green-deep);
   border-color: var(--green-hi);
+}
+
+.owner--you .owner__note {
+  color: var(--text);
 }
 
 .owner__icon {

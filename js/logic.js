@@ -26,7 +26,7 @@ const MONTH_NAMES = [
 
 /** A podium finish: "1st Runner-Up", "Champion", "2nd Place"... */
 function isWin(activity) {
-  return /runner-up|champion|place/i.test(activity.result || '');
+  return /\b(runner-up|champion|\d+(st|nd|rd|th) place)\b/i.test(activity.result || '');
 }
 
 /** The winning Beyond Class entry that links to this project, if any. */

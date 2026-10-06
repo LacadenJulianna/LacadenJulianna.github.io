@@ -176,7 +176,7 @@ function renderGraph() {
   graph.append(
     header,
     ...rows,
-    el('div', { className: 'graph__legend' }, [el('span', { text: 'One square per month. Hover a square to see what happened.' }), key])
+    el('div', { className: 'graph__legend' }, [el('span', { text: 'One square per month. Hover or tap a square to see what happened.' }), key])
   );
 }
 
