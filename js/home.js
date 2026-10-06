@@ -35,12 +35,6 @@ function renderFacts() {
     });
 }
 
-function colorDot(color) {
-  const dot = el('i', { className: 'dot', attrs: { 'aria-hidden': 'true' } });
-  dot.style.background = color;
-  return dot;
-}
-
 function langDot(project) {
   const lang = projectLang(project);
   return el('span', { className: 'lang' }, [colorDot(lang.color), document.createTextNode(lang.name)]);
@@ -89,7 +83,7 @@ function featureBlock(project, i) {
         ...project.techStack
           .filter((t) => t !== lang.name)
           .slice(0, 3)
-          .map((t) => el('span', { className: 'chip', text: t })),
+          .map((t) => techChip(t)),
       ]),
       el('span', { className: 'more', text: 'View project →' }),
     ]),
@@ -146,7 +140,7 @@ function renderAbout() {
       el(
         'ul',
         { className: 'chips' },
-        items.map((item) => el('li', { className: 'chip' }, [LANG_COLORS[item] ? colorDot(LANG_COLORS[item]) : null, document.createTextNode(item)]))
+        items.map((item) => techChip(item, 'li'))
       )
     );
   });

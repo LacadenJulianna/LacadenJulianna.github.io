@@ -48,6 +48,18 @@ function backLink(href, text) {
   return el('a', { className: 'back', attrs: { href } }, [icon('arrow-left'), document.createTextNode(text)]);
 }
 
+/** Small round colour swatch (decorative). */
+function colorDot(color) {
+  const dot = el('i', { className: 'dot', attrs: { 'aria-hidden': 'true' } });
+  dot.style.background = color;
+  return dot;
+}
+
+/** Tech-stack chip with its colour dot (techColor from logic.js). */
+function techChip(name, tag = 'span') {
+  return el(tag, { className: 'chip' }, [colorDot(techColor(name)), document.createTextNode(name)]);
+}
+
 /**
  * Site nav, shared by every page. On the homepage the links jump to sections
  * (home.js adds the scroll spy); on detail pages they lead back to index.html

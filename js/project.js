@@ -41,7 +41,10 @@ function renderHeader(project, win) {
     el('p', { className: 'label', text: `${project.category} · ${project.year}` }),
     el('h1', { text: project.title }),
     el('p', { className: 'lead', text: project.summary }),
-    win ? el('span', { className: 'chip chip--win', text: `🏆 ${win.result} · ${shortTitle(win.title)}` }) : null,
+    el('div', { className: 'chips' }, [
+      win ? el('span', { className: 'chip chip--win', text: `🏆 ${win.result} · ${shortTitle(win.title)}` }) : null,
+      ...project.techStack.map((t) => techChip(t)),
+    ]),
     links.length ? el('div', { className: 'btns' }, links) : null,
   ]);
 }
@@ -130,7 +133,6 @@ function renderProject() {
     metaList([
       ['Role', project.role],
       ['Duration', project.duration],
-      ['Stack', project.techStack.join(', ')],
       win ? ['Result', win.result, true] : null,
     ]),
     renderContent(project),

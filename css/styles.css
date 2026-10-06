@@ -218,7 +218,9 @@ ol {
   justify-content: space-between;
   align-items: baseline;
   gap: 16px;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
+  padding-top: 20px;
+  border-top: 2px solid var(--green-hi);
 }
 
 .section-head h2 {
@@ -429,7 +431,7 @@ ol {
 /* ---------- projects ---------- */
 
 .works {
-  border-top: 1px solid var(--text);
+  border-top: 1px solid var(--line);
 }
 
 /* Shared row hover: a dark-green band with a bright left edge that bleeds
@@ -461,10 +463,10 @@ ol {
 
 .work {
   display: grid;
-  grid-template-columns: 44px minmax(0, 1fr) 170px 130px 44px 16px;
-  gap: 16px;
+  grid-template-columns: 44px minmax(0, 1fr) 180px 120px 48px 16px;
+  gap: 24px;
   align-items: baseline;
-  padding-block: 17px;
+  padding-block: 26px;
   border-bottom: 1px solid var(--line);
 }
 
@@ -515,8 +517,8 @@ ol {
 .feature {
   display: grid;
   grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-  gap: 28px;
-  padding-block: 22px 26px;
+  gap: 40px;
+  padding-block: 32px 36px;
   border-bottom: 1px solid var(--line);
 }
 
@@ -564,8 +566,9 @@ ol {
 }
 
 .feature__body h3 {
-  margin: 10px 0 12px;
+  margin: 16px 0 16px;
   font-size: 26px;
+  line-height: 1.2;
   transition: color var(--fast);
 }
 
@@ -574,16 +577,18 @@ ol {
 }
 
 .feature__summary {
-  font-size: 14px;
+  font-size: 15px;
+  line-height: 1.7;
 }
 
 .feature .chips {
-  margin-top: 16px;
+  gap: 8px;
+  margin-top: 24px;
 }
 
 .feature .more {
   display: inline-block;
-  margin-top: 18px;
+  margin-top: 26px;
 }
 
 /* ---------- about (README card) ---------- */
@@ -789,7 +794,7 @@ ol {
 
 .ledger {
   margin-top: 18px;
-  border-top: 1px solid var(--text);
+  border-top: 1px solid var(--line);
 }
 
 .ledger__row {
@@ -906,7 +911,7 @@ ol {
   padding-block: 48px 26px;
   background: var(--green-deep);
   color: var(--text);
-  border-top: 1px solid var(--green);
+  border-top: 2px solid var(--green-hi);
 }
 
 .footer__big {
@@ -1005,7 +1010,8 @@ ol {
   font-size: 16px;
 }
 
-.detail-head .chip {
+.detail-head > .chip,
+.detail-head .chips {
   margin-top: 16px;
 }
 
@@ -1410,7 +1416,9 @@ ol {
 
   .work {
     grid-template-columns: 32px minmax(0, 1fr) auto;
-    row-gap: 4px;
+    column-gap: 14px;
+    row-gap: 8px;
+    padding-block: 22px;
   }
 
   .work__n {

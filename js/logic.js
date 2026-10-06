@@ -19,6 +19,42 @@ const LANG_COLORS = {
 };
 const NO_LANG_COLOR = '#7d8590';
 
+/* Brand-ish colours for the dots on every other tech-stack and toolkit chip. */
+const TECH_COLORS = {
+  SQL: '#e38c00',
+  WPF: '#512bd4',
+  '.NET 8': '#512bd4',
+  'WPF / .NET 8': '#512bd4',
+  SQLite: '#44a8e0',
+  ClosedXML: '#217346',
+  LangGraph: '#1c9b8c',
+  FastMCP: '#d4d4d8',
+  'FastMCP / MCP': '#d4d4d8',
+  Playwright: '#d65348',
+  'Google Genkit': '#fbbc04',
+  Gemini: '#8e75ff',
+  'scikit-learn': '#f7931e',
+  Ollama: '#e6edf3',
+  'Fireworks AI': '#8b5cf6',
+  Docker: '#2496ed',
+  pytest: '#0a9edc',
+  Firebase: '#ff9100',
+  Netlify: '#00c7b7',
+  'Node.js': '#5fa04e',
+  FastAPI: '#009688',
+  'Ubuntu Server': '#e95420',
+  phpMyAdmin: '#f89c0e',
+  MySQL: '#4479a1',
+  Arduino: '#00979d',
+  LoRa: '#00a1e0',
+  'GPS / IMU sensors': '#f59e0b',
+  'Turbine Systems': '#38bdf8',
+  'LiFePO4 Battery': '#facc15',
+  'Sediment Filtration': '#a16207',
+  Git: '#f05032',
+  GitHub: '#e6edf3',
+};
+
 const MONTH_NAMES = [
   'January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December',
@@ -38,6 +74,11 @@ function winFor(projectId, activities) {
 function projectLang(project) {
   const name = project.lang || project.techStack.find((t) => t in LANG_COLORS) || project.category;
   return { name, color: LANG_COLORS[name] || NO_LANG_COLOR };
+}
+
+/** Dot colour for any tech name: its language colour, its brand colour, else grey. */
+function techColor(name) {
+  return LANG_COLORS[name] || TECH_COLORS[name] || NO_LANG_COLOR;
 }
 
 function monthKey(year, month) {
@@ -104,5 +145,5 @@ function shortTitle(title) {
 }
 
 if (typeof module !== 'undefined') {
-  module.exports = { LANG_COLORS, isWin, winFor, projectLang, periodMonths, levelFor, buildGraph, shortTitle };
+  module.exports = { LANG_COLORS, isWin, winFor, projectLang, techColor, periodMonths, levelFor, buildGraph, shortTitle };
 }

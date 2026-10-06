@@ -1,6 +1,6 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const { isWin, winFor, projectLang, periodMonths, levelFor, buildGraph, shortTitle } = require('../js/logic.js');
+const { isWin, winFor, projectLang, techColor, periodMonths, levelFor, buildGraph, shortTitle } = require('../js/logic.js');
 
 test('isWin matches podium results only', () => {
   assert.equal(isWin({ result: '1st Runner-Up' }), true);
@@ -68,4 +68,10 @@ test('buildGraph makes one row per year up to now, with levels and future months
   assert.equal(years[1].months[9].future, false); // current month is not "future"
   assert.equal(years[1].months[10].future, true);
   assert.deepEqual(buildGraph([{ title: 'C' }], now), []);
+});
+
+test('techColor: languages, other tech, then grey', () => {
+  assert.equal(techColor('C#'), '#178600');
+  assert.equal(techColor('Docker'), '#2496ed');
+  assert.equal(techColor('Problem Solving'), '#7d8590');
 });
