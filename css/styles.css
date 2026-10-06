@@ -1030,30 +1030,35 @@ ol {
   width: 100%;
 }
 
+/* Role / Duration / Result: green boxes, with room before the first section */
 .meta {
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: minmax(0, 1fr);
-  border-bottom: 1px solid var(--line);
+  gap: 12px;
+  margin-block: 32px 48px;
 }
 
 .meta > div {
-  padding-block: 20px;
+  padding: 18px 20px;
+  background: var(--green-deep);
+  border: 1px solid var(--green-mid);
+  border-radius: var(--radius);
 }
 
-.meta > div + div {
-  padding-left: 18px;
-  border-left: 1px solid var(--line);
+.meta dt {
+  color: var(--text);
+  opacity: 0.85;
 }
 
 .meta dd {
   margin-top: 6px;
-  font-size: 14px;
+  font-size: 15px;
   color: var(--text);
 }
 
 .meta dd.is-win {
-  color: var(--green-hi);
+  color: var(--graph-4); /* brighter green, readable on the green box */
 }
 
 /* Each detail section: numbered green label, with a short green tab on the
@@ -1433,12 +1438,6 @@ ol {
   .meta {
     grid-auto-flow: row;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 18px;
-  }
-
-  .meta > div + div {
-    padding-left: 0;
-    border-left: 0;
   }
 }
 
