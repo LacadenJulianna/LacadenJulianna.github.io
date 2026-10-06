@@ -439,12 +439,12 @@ const PROJECTS = [
   {
     id: 'bookworm',
     period: { from: '2026-03' },
-    title: 'Bookworm — C++ / SFML Word Game',
+    title: 'Orthography — A Bookworm-Inspired Recreational Game',
     category: 'Desktop Game',
     year: 2026,
     techStack: ['C++', 'SFML', 'CMake'],
     summary:
-      'A recreation of the classic Bookworm word game in C++ with an SFML interface: spell words from adjacent tiles on an 8×8 board, clear burning tiles before they explode, and chase the high score.',
+      'A recreation of the classic Bookworm word game in C++ with an SFML interface: spell words from adjacent tiles on an 8x8 board, clear burning tiles before they explode, and chase the high score.',
     role: 'Developer — UI, Menu & Word Checker',
     duration: 'March 2026',
     overviewBody:
@@ -460,7 +460,7 @@ const PROJECTS = [
     keyChallenge:
       "SFML 3 removed sf::Text's default constructor, which broke the reusable Button struct the whole toolbar and menu were built on. I kept the button design by holding its label in a std::optional<sf::Text> that is created once the font is loaded.",
     outcome:
-      'A complete, playable Bookworm recreation built on clean class boundaries — Tile, Grid, Dictionary, Player and GameEngine — that builds from one CMake command, with SFML downloaded automatically.',
+      'A complete, playable Bookworm-inspired game built on clean class boundaries — Tile, Grid, Dictionary, Player and GameEngine — that builds from one CMake command, with SFML downloaded automatically.',
     architecture: [
       { label: 'Menu, Toolbar & Buttons', owner: 'you', type: 'ui' },
       { label: 'Word Checker (DFS) & Dictionary', owner: 'you', type: 'logic' },
