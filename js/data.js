@@ -436,4 +436,40 @@ const PROJECTS = [
     cover: 'assets/babel/cover.jpg',
     video: 'assets/babel/demo.mp4',
   },
+  {
+    id: 'bookworm',
+    period: { from: '2026-03' },
+    title: 'Bookworm — C++ / SFML Word Game',
+    category: 'Desktop Game',
+    year: 2026,
+    techStack: ['C++', 'SFML', 'CMake'],
+    summary:
+      'A recreation of the classic Bookworm word game in C++ with an SFML interface: spell words from adjacent tiles on an 8×8 board, clear burning tiles before they explode, and chase the high score.',
+    role: 'Developer — UI, Menu & Word Checker',
+    duration: 'March 2026',
+    overviewBody:
+      'A team project for our college Object-Oriented Programming course. Players spell words from 8-directionally adjacent letter tiles, earn Scrabble-style points multiplied by their level, and fill an XP bar to level up — which sets tiles on fire that explode and cost a life unless they are used in a word. I wrote the first working draft of the whole game (the Tile, Grid, Dictionary, Player and GameEngine classes and the CMake build), then built the menu screen, toolbar buttons, game-over overlay and the word checker that warns when no word is left on the board, plus the window resize and font fixes and the README.',
+    keyFeatures: [
+      '8×8 letter grid with adjacency and no-reuse rules enforced on every click',
+      'Dictionary loaded into an unordered_set for O(1) word lookups, with a built-in fallback word list',
+      'Depth-first search over the board that warns the player when no valid word is possible',
+      'Scrabble-scale scoring with length bonuses, a level multiplier, an XP bar and five lives',
+      'Burning tiles that count down per word and explode, with spawn rules that keep them usable',
+      'Menu, How to Play and game-over screens, background music, sound effects and a saved high score',
+    ],
+    keyChallenge:
+      "SFML 3 removed sf::Text's default constructor, which broke the reusable Button struct the whole toolbar and menu were built on. I kept the button design by holding its label in a std::optional<sf::Text> that is created once the font is loaded.",
+    outcome:
+      'A complete, playable Bookworm recreation built on clean class boundaries — Tile, Grid, Dictionary, Player and GameEngine — that builds from one CMake command, with SFML downloaded automatically.',
+    architecture: [
+      { label: 'Menu, Toolbar & Buttons', owner: 'you', type: 'ui' },
+      { label: 'Word Checker (DFS) & Dictionary', owner: 'you', type: 'logic' },
+      { label: 'Grid & Burning Tiles', owner: 'team', type: 'logic' },
+      { label: 'Player HUD, XP & Lives', owner: 'team', type: 'analytics' },
+      { label: 'Music & Sound Effects', owner: 'team', type: 'ui' },
+    ],
+    repoUrl: 'https://github.com/Gerard-Alexander/Bookworm',
+    cover: 'assets/bookworm/cover.jpg',
+    video: 'assets/bookworm/demo.mp4',
+  },
 ];

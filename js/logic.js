@@ -51,6 +51,8 @@ const TECH_COLORS = {
   'Turbine Systems': '#38bdf8',
   'LiFePO4 Battery': '#facc15',
   'Sediment Filtration': '#a16207',
+  SFML: '#8cc445',
+  CMake: '#3b82c4',
   Git: '#f05032',
   GitHub: '#e6edf3',
 };
