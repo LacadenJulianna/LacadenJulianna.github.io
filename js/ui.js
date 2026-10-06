@@ -1,13 +1,5 @@
 /* Small DOM helpers shared by the page scripts. */
 
-/* Pill color for each Beyond Class tag. */
-const TAG_COLORS = {
-  Leadership: 'var(--yellow)',
-  Hackathon: 'var(--pink)',
-  Competition: 'var(--orange)',
-  License: 'var(--green)',
-};
-
 /**
  * Create an element. Text is always set with textContent, never innerHTML,
  * so content from data.js can't inject markup.
@@ -54,6 +46,75 @@ function githubIcon() {
 /** "← Back"-style link used on the detail pages. */
 function backLink(href, text) {
   return el('a', { className: 'back', attrs: { href } }, [icon('arrow-left'), document.createTextNode(text)]);
+}
+
+/**
+ * Site nav, shared by every page. On the homepage the links jump to sections
+ * (home.js adds the scroll spy); on detail pages they lead back to index.html
+ * and `current` underlines the section the page belongs to.
+ */
+function renderNav({ home = false, current = '' } = {}) {
+  const nav = document.getElementById('nav');
+  const base = home ? '' : 'index.html';
+  const link = (id, text, count) => {
+    const a = el('a', { attrs: { href: `${base}#${id}` } }, [
+      document.createTextNode(text),
+      count != null ? el('span', { className: 'count', text: String(count) }) : null,
+    ]);
+    a.dataset.section = id;
+    if (id === current) a.classList.add('is-current');
+    return el('li', {}, [a]);
+  };
+  const links = el('ul', { className: 'nav__links', attrs: { id: 'nav-links' } }, [
+    link('projects', 'Projects', PROJECTS.length),
+    link('about', 'About'),
+    link('beyond', 'Beyond', EXTRACURRICULAR.length),
+  ]);
+  const brand = el('a', { className: 'nav__brand', attrs: { href: home ? '#top' : 'index.html' } }, [
+    document.createTextNode('julianna'),
+    el('span', { text: '.' }),
+    document.createTextNode('lacaden'),
+  ]);
+  const toggle = el(
+    'button',
+    { className: 'nav__toggle', attrs: { type: 'button', 'aria-label': 'Open menu', 'aria-expanded': 'false', 'aria-controls': 'nav-links' } },
+    [icon('menu')]
+  );
+  nav.append(el('div', { className: 'nav__inner' }, [brand, toggle, links]));
+
+  const setOpen = (open) => {
+    nav.classList.toggle('is-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  };
+  toggle.addEventListener('click', () => setOpen(!nav.classList.contains('is-open')));
+  links.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+}
+
+/** "← All projects / 04" line at the top of the detail pages. */
+function crumb(href, text, number) {
+  return el('div', { className: 'crumb label' }, [backLink(href, text), number ? el('span', { text: `/ ${number}` }) : null]);
+}
+
+/** Detail-page section: mono label on the left, content on the right. */
+function block(labelText, children) {
+  return el('section', { className: 'block' }, [
+    el('h2', { className: 'label block__label', text: labelText }),
+    el('div', { className: 'block__body' }, children),
+  ]);
+}
+
+/** Detail-page meta strip from [term, value, highlight?] rows; rows without a value are skipped. */
+function metaList(rows) {
+  return el(
+    'dl',
+    { className: 'meta' },
+    rows
+      .filter((row) => row && row[1])
+      .map(([term, value, highlight]) =>
+        el('div', {}, [el('dt', { className: 'label', text: term }), el('dd', { className: highlight ? 'is-win' : '', text: value })])
+      )
+  );
 }
 
 /**
