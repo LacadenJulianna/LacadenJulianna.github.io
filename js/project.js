@@ -16,8 +16,8 @@ const OWNER_ICONS = {
 function renderNotFound(root) {
   document.title = 'Project not found — Julianna Lacaden';
   root.append(
-    el('div', { className: 'card not-found' }, [
-      el('p', { className: 'label label--pink', text: '404' }),
+    el('div', { className: 'not-found' }, [
+      el('p', { className: 'label', text: '404' }),
       el('h1', { text: 'Project not found' }),
       el('p', { text: "That project doesn't exist, or the link is missing part of its address." }),
       backLink('index.html#projects', 'All projects'),
@@ -25,51 +25,25 @@ function renderNotFound(root) {
   );
 }
 
-function renderHeader(project, index) {
-  return el('header', { className: 'card detail-head' }, [
-    el('p', { className: 'label label--yellow', text: `${project.category} · ${project.year}` }),
-    el('h1', { text: project.title }),
-    el(
-      'div',
-      { className: 'chips' },
-      project.techStack.map((t) => el('span', { className: 'chip', text: t }))
-    ),
+function renderHeader(project, win) {
+  const links = [
     project.repoUrl
-      ? el('a', {
-          className: 'repo-link',
-          text: 'View on GitHub ↗',
-          attrs: { href: project.repoUrl, target: '_blank', rel: 'noopener' },
-        })
+      ? el('a', { className: 'btn', attrs: { href: project.repoUrl, target: '_blank', rel: 'noopener' } }, [
+          githubIcon(),
+          document.createTextNode('View on GitHub ↗'),
+        ])
       : null,
     project.liveUrl
-      ? el('a', {
-          className: 'repo-link',
-          text: 'View live site ↗',
-          attrs: { href: project.liveUrl, target: '_blank', rel: 'noopener' },
-        })
+      ? el('a', { className: 'btn btn--primary', text: 'View live site ↗', attrs: { href: project.liveUrl, target: '_blank', rel: 'noopener' } })
       : null,
-    el('span', { className: 'detail-head__num', text: pad2(index + 1), attrs: { 'aria-hidden': 'true' } }),
+  ].filter(Boolean);
+  return el('header', { className: 'detail-head' }, [
+    el('p', { className: 'label', text: `${project.category} · ${project.year}` }),
+    el('h1', { text: project.title }),
+    el('p', { className: 'lead', text: project.summary }),
+    win ? el('span', { className: 'chip chip--win', text: `🏆 ${win.result} · ${shortTitle(win.title)}` }) : null,
+    links.length ? el('div', { className: 'btns' }, links) : null,
   ]);
-}
-
-function renderMeta(project) {
-  const rows = [
-    ['Role', project.role],
-    ['Duration', project.duration],
-    ['Year', String(project.year)],
-    ['Category', project.category],
-  ];
-  return el(
-    'aside',
-    { className: 'meta' },
-    rows.map(([term, value]) =>
-      el('dl', {}, [el('dt', { className: 'label', text: term }), el('dd', { text: value })])
-    )
-  );
-}
-
-function section(labelText, children, labelClass = 'label--yellow') {
-  return el('section', {}, [el('span', { className: `label ${labelClass}`, text: labelText }), ...children]);
 }
 
 function renderOwnership(nodes) {
@@ -86,17 +60,17 @@ function renderOwnership(nodes) {
       ])
     );
   });
-  const legend = el('div', { className: 'legend tag' }, [
+  const legend = el('div', { className: 'legend' }, [
     el('span', { className: 'legend--you', text: 'Built by me' }),
     el('span', { text: 'Built by teammates' }),
   ]);
-  return section('Who built what', [row, legend]);
+  return block('Who built what', [row, legend]);
 }
 
 function renderContent(project) {
-  const content = el('div', { className: 'content' }, [
-    section('Overview', [el('p', { className: 'lead', text: project.summary }), el('p', { text: project.overviewBody })]),
-    section('Key features', [
+  return el('div', { className: 'content' }, [
+    block('Overview', [el('p', { text: project.overviewBody })]),
+    block('Key features', [
       el(
         'ol',
         { className: 'features' },
@@ -105,7 +79,7 @@ function renderContent(project) {
     ]),
     project.architecture ? renderOwnership(project.architecture) : null,
     project.video
-      ? section('Demo', [
+      ? block('Demo', [
           el('div', { className: 'gallery__stage' }, [
             el('video', {
               className: 'gallery__video',
@@ -115,18 +89,14 @@ function renderContent(project) {
         ])
       : null,
     project.gallery
-      ? section(project.galleryLabel || 'Screenshots', [
+      ? block(project.galleryLabel || 'Screenshots', [
           project.mediaNote ? el('p', { className: 'media-note', text: project.mediaNote }) : null,
           renderGallery(project.gallery, `${project.title} ${(project.galleryLabel || 'screenshot').toLowerCase()}`),
         ])
       : null,
-    el('section', { className: 'card challenge' }, [
-      el('span', { className: 'label label--yellow', text: 'Key challenge' }),
-      el('p', { text: project.keyChallenge }),
-    ]),
-    section('Outcome', [el('p', { className: 'outcome', text: project.outcome })]),
+    block('Key challenge', [el('p', { text: project.keyChallenge })]),
+    block('Outcome', [el('p', { className: 'outcome', text: project.outcome })]),
   ]);
-  return content;
 }
 
 function renderPager(index) {
@@ -145,26 +115,28 @@ function renderProject() {
   const id = new URLSearchParams(window.location.search).get('id');
   const index = PROJECTS.findIndex((p) => p.id === id);
 
-  root.append(
-    el('div', { className: 'topbar' }, [
-      backLink('index.html#projects', 'Back'),
-      index >= 0 ? el('span', { className: 'label label--yellow', text: `${pad2(index + 1)} / ${pad2(PROJECTS.length)}` }) : null,
-    ])
-  );
-
+  renderNav({ current: 'projects' });
+  root.append(crumb('index.html#projects', 'All projects', index >= 0 ? pad2(index + 1) : ''));
   if (index < 0) {
     renderNotFound(root);
     return;
   }
 
   const project = PROJECTS[index];
+  const win = winFor(project.id, EXTRACURRICULAR);
   document.title = `${project.title} — Julianna Lacaden`;
   root.append(
-    renderHeader(project, index),
-    el('div', { className: 'detail-body' }, [renderMeta(project), renderContent(project)]),
+    renderHeader(project, win),
+    metaList([
+      ['Role', project.role],
+      ['Duration', project.duration],
+      ['Stack', project.techStack.join(', ')],
+      win ? ['Result', win.result, true] : null,
+    ]),
+    renderContent(project),
     renderPager(index)
   );
-  reveal(root.querySelectorAll('.detail-head, .meta, .content > section, .pager'));
+  reveal(root.querySelectorAll('.detail-head, .meta, .block, .pager'));
 }
 
 renderProject();
