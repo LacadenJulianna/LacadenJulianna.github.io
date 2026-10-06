@@ -41,10 +41,7 @@ function renderHeader(project, win) {
     el('p', { className: 'label', text: `${project.category} · ${project.year}` }),
     el('h1', { text: project.title }),
     el('p', { className: 'lead', text: project.summary }),
-    el('div', { className: 'chips' }, [
-      win ? el('span', { className: 'chip chip--win', text: `🏆 ${win.result} · ${shortTitle(win.title)}` }) : null,
-      ...project.techStack.map((t) => techChip(t)),
-    ]),
+    win ? el('span', { className: 'chip chip--win', text: `🏆 ${win.result} · ${shortTitle(win.title)}` }) : null,
     links.length ? el('div', { className: 'btns' }, links) : null,
   ]);
 }
@@ -73,6 +70,7 @@ function renderOwnership(nodes) {
 function renderContent(project) {
   return el('div', { className: 'content' }, [
     block('Overview', [el('p', { text: project.overviewBody })]),
+    block('Tech stack', [el('div', { className: 'chips stack' }, project.techStack.map((t) => techChip(t)))]),
     block('Key features', [
       el(
         'ol',
@@ -97,7 +95,7 @@ function renderContent(project) {
           renderGallery(project.gallery, `${project.title} ${(project.galleryLabel || 'screenshot').toLowerCase()}`),
         ])
       : null,
-    block('Key challenge', [el('p', { text: project.keyChallenge })]),
+    block('Key challenge', [el('p', { className: 'challenge', text: project.keyChallenge })]),
     block('Outcome', [el('p', { className: 'outcome', text: project.outcome })]),
   ]);
 }

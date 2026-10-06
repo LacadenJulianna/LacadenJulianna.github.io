@@ -994,7 +994,7 @@ ol {
 }
 
 .detail-head {
-  padding-block: 24px 30px;
+  padding-block: 24px 40px;
   border-bottom: 1px solid var(--line);
 }
 
@@ -1038,7 +1038,7 @@ ol {
 }
 
 .meta > div {
-  padding-block: 16px;
+  padding-block: 20px;
 }
 
 .meta > div + div {
@@ -1056,29 +1056,90 @@ ol {
   color: var(--green-hi);
 }
 
+/* Each detail section: numbered green label, with a short green tab on the
+   divider line above it. */
+.content {
+  counter-reset: block;
+}
+
 .block {
+  position: relative;
   display: grid;
   grid-template-columns: 200px minmax(0, 1fr);
-  gap: 36px;
-  padding-block: 30px;
+  gap: 56px;
+  padding-block: 48px;
   border-bottom: 1px solid var(--line);
 }
 
+.block::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 200px;
+  height: 2px;
+  background: var(--green-hi);
+}
+
 .block__label {
-  padding-top: 3px;
+  padding-top: 4px;
+  color: var(--green-hi);
+}
+
+.block__label::before {
+  counter-increment: block;
+  content: counter(block, decimal-leading-zero) ' / ';
+  color: var(--soft);
 }
 
 .block__body > * + * {
-  margin-top: 14px;
+  margin-top: 18px;
 }
 
 .block__body p {
-  line-height: 1.7;
+  font-size: 16px;
+  line-height: 1.8;
 }
 
-.outcome {
-  font-size: 16px;
+/* keep the small print inside the You-vs-team boxes and media notes small */
+.block__body .owner__label {
+  font-size: 13.5px;
+  line-height: 1.35;
+}
+
+.block__body .owner__note,
+.block__body .media-note {
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+.stack {
+  gap: 10px;
+}
+
+.stack .chip {
+  padding: 6px 14px;
+  font-size: 12px;
   color: var(--text);
+  background: color-mix(in srgb, var(--c, var(--soft)) 14%, transparent);
+  border-color: color-mix(in srgb, var(--c, var(--soft)) 55%, transparent);
+}
+
+.challenge,
+.outcome {
+  padding: 22px 24px;
+  border-left: 3px solid var(--green-hi);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+.challenge {
+  background: var(--panel);
+}
+
+.block__body .outcome {
+  font-size: 17px;
+  color: var(--text);
+  background: var(--green-deep);
 }
 
 .media-note {
@@ -1088,8 +1149,8 @@ ol {
 
 .features li {
   display: grid;
-  grid-template-columns: 36px minmax(0, 1fr);
-  padding-block: 10px;
+  grid-template-columns: 44px minmax(0, 1fr);
+  padding-block: 16px;
   border-bottom: 1px solid var(--line);
 }
 
@@ -1098,10 +1159,10 @@ ol {
 }
 
 .features li span {
-  padding-top: 3px;
+  padding-top: 4px;
   font-family: var(--font-mono);
   font-size: 12px;
-  color: var(--soft);
+  color: var(--green-hi);
 }
 
 /* You-vs-team diagram */
@@ -1356,7 +1417,12 @@ ol {
   }
 
   .block {
-    gap: 10px;
+    gap: 16px;
+    padding-block: 36px;
+  }
+
+  .block::before {
+    width: 64px;
   }
 
   .readme__body {

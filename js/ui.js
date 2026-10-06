@@ -57,7 +57,10 @@ function colorDot(color) {
 
 /** Tech-stack chip with its colour dot (techColor from logic.js). */
 function techChip(name, tag = 'span') {
-  return el(tag, { className: 'chip' }, [colorDot(techColor(name)), document.createTextNode(name)]);
+  const color = techColor(name);
+  const chip = el(tag, { className: 'chip' }, [colorDot(color), document.createTextNode(name)]);
+  chip.style.setProperty('--c', color); // lets a section tint the whole chip (see .stack)
+  return chip;
 }
 
 /**
