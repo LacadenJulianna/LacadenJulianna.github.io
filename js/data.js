@@ -28,6 +28,8 @@ const PROFILE = {
   email: 'lacaden.juliannaraine@gmail.com',
   github: 'https://github.com/LacadenJulianna',
   linkedin: 'https://www.linkedin.com/in/julianna-raine-lacaden-640047383',
+  phone: '0960 460 4996', // shown as-is; the tel: link strips spaces and uses +63
+  resume: 'assets/resume.pdf', // replace this file to update the résumé; leave '' to hide the links
   course: 'BS Computer Science',
   school: 'Saint Louis University',
   bio: 'BS Computer Science student at Saint Louis University. Building software across web, desktop, and agentic AI systems.',

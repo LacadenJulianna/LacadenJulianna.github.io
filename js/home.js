@@ -17,7 +17,8 @@ function renderHero() {
           linkedinIcon(),
           document.createTextNode('LinkedIn ↗'),
         ])
-      : '' // append(null) would print "null"
+      : '', // append(null) would print "null"
+    PROFILE.resume ? el('a', { className: 'btn', text: 'Résumé ↗', attrs: { href: PROFILE.resume, target: '_blank', rel: 'noopener' } }) : ''
   );
   const pic = document.getElementById('hero-pic');
   pic.append(
@@ -335,8 +336,16 @@ function renderFooter() {
   document.getElementById('footer-links').append(
     el('a', { text: 'GitHub ↗', attrs: { href: PROFILE.github, target: '_blank', rel: 'noopener' } }),
     PROFILE.linkedin ? el('a', { text: 'LinkedIn ↗', attrs: { href: PROFILE.linkedin, target: '_blank', rel: 'noopener' } }) : '',
-    el('a', { text: 'Email ↗', attrs: { href: `mailto:${PROFILE.email}` } })
+    el('a', { text: 'Email ↗', attrs: { href: `mailto:${PROFILE.email}` } }),
+    PROFILE.phone ? el('a', { text: PROFILE.phone, attrs: { href: telHref(PROFILE.phone) } }) : '',
+    PROFILE.resume ? el('a', { text: 'Résumé ↗', attrs: { href: PROFILE.resume, target: '_blank', rel: 'noopener' } }) : ''
   );
+}
+
+/** "0960 460 4996" -> "tel:+639604604996" (PH local format to international). */
+function telHref(phone) {
+  const digits = phone.replace(/\D/g, '');
+  return `tel:${digits.startsWith('0') ? `+63${digits.slice(1)}` : `+${digits}`}`;
 }
 
 /* Underlines the nav link of whichever section is in view and slides the line to it. */
