@@ -27,6 +27,7 @@ const PROFILE = {
   location: 'Baguio City, PH',
   email: 'lacaden.juliannaraine@gmail.com',
   github: 'https://github.com/LacadenJulianna',
+  linkedin: 'https://www.linkedin.com/in/julianna-raine-lacaden-640047383',
   course: 'BS Computer Science',
   school: 'Saint Louis University',
   bio: 'BS Computer Science student at Saint Louis University. Building software across web, desktop, and agentic AI systems.',

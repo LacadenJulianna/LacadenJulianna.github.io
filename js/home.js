@@ -11,7 +11,13 @@ function renderHero() {
     el('a', { className: 'btn', attrs: { href: PROFILE.github, target: '_blank', rel: 'noopener' } }, [
       githubIcon(),
       document.createTextNode('GitHub ↗'),
-    ])
+    ]),
+    PROFILE.linkedin
+      ? el('a', { className: 'btn', attrs: { href: PROFILE.linkedin, target: '_blank', rel: 'noopener' } }, [
+          linkedinIcon(),
+          document.createTextNode('LinkedIn ↗'),
+        ])
+      : '' // append(null) would print "null"
   );
   const pic = document.getElementById('hero-pic');
   pic.append(
@@ -328,6 +334,7 @@ function renderFooter() {
   document.getElementById('footer-place').textContent = PROFILE.location;
   document.getElementById('footer-links').append(
     el('a', { text: 'GitHub ↗', attrs: { href: PROFILE.github, target: '_blank', rel: 'noopener' } }),
+    PROFILE.linkedin ? el('a', { text: 'LinkedIn ↗', attrs: { href: PROFILE.linkedin, target: '_blank', rel: 'noopener' } }) : '',
     el('a', { text: 'Email ↗', attrs: { href: `mailto:${PROFILE.email}` } })
   );
 }
