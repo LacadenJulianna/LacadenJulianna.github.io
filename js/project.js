@@ -81,6 +81,7 @@ function renderContent(project) {
     project.architecture ? renderOwnership(project.architecture) : null,
     project.video
       ? block('Demo', [
+          project.mediaNote ? el('p', { className: 'media-note', text: project.mediaNote }) : null,
           el('div', { className: 'gallery__stage' }, [
             el('video', {
               className: 'gallery__video',
@@ -91,7 +92,7 @@ function renderContent(project) {
       : null,
     project.gallery
       ? block(project.galleryLabel || 'Screenshots', [
-          project.mediaNote ? el('p', { className: 'media-note', text: project.mediaNote }) : null,
+          project.mediaNote && !project.video ? el('p', { className: 'media-note', text: project.mediaNote }) : null,
           renderGallery(project.gallery, `${project.title} ${(project.galleryLabel || 'screenshot').toLowerCase()}`),
         ])
       : null,

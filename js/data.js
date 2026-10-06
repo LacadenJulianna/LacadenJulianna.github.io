@@ -10,6 +10,8 @@
  *   gallery     (optional) screenshot paths; shows the carousel
  *   galleryLabel (optional) carousel heading; defaults to "Screenshots"
  *   cover       (optional) image for the homepage card; defaults to gallery[0]
+ *   mediaNote   (optional) grey note above the demo video, or above the gallery
+ *               when there's no video
  *   repoUrl     (optional) adds a "View on GitHub" link
  *   liveUrl     (optional) adds a "View live site" link
  *   period      (optional) { from: 'YYYY-MM', to: 'YYYY-MM' } for the Beyond Class
@@ -504,6 +506,8 @@ const PROJECTS = [
       { label: 'Python Client (omniORB)', owner: 'team', type: 'ui' },
       { label: 'MySQL Database', owner: 'team', type: 'database' },
     ],
+    mediaNote:
+      "What's the Word is a multiplayer game, so a single recording can't show a full match: it needs two players logged in at once. This demo shows the login, lobby and matchmaking from one player's side.",
     repoUrl: 'https://github.com/LacadenJulianna/CORBA',
     cover: 'assets/whats-the-word/cover.jpg',
     video: 'assets/whats-the-word/demo.mp4',
