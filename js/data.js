@@ -146,13 +146,13 @@ const EXTRACURRICULAR = [
     id: 'rainwatt-smart-city',
     period: { from: '2025-11' },
     year: '2025',
-    date: 'November 2025',
+    date: 'November 26–27, 2025',
     tag: 'Competition',
     title: 'Smart City Convergence 2025',
-    org: 'Smart City Convergence 2025 · Baguio City',
+    org: 'Baguio ICT Council (BCICTC), DOST & DICT · Baguio Convention and Cultural Center',
     result: '1st Runner-Up',
     description:
-      'Designed RainWatt, a rain-powered micro-hydropower system, as Sustainability Researcher & Engineer, contributing renewable microgeneration research. Our team placed 1st Runner-Up in the Environmental Innovation category.',
+      'Designed RainWatt, a rain-powered micro-hydropower system, as Sustainability Researcher & Engineer, contributing renewable microgeneration research. Our team placed 1st Runner-Up in the Environmental Innovation category at the competition organized by the Baguio ICT Council (BCICTC), DOST and DICT, held at the Baguio Convention and Cultural Center.',
     project: 'rainwatt',
     banner: 'assets/activities/banners/baguio-smart-city.png',
     images: [
@@ -498,7 +498,7 @@ const PROJECTS = [
     role: 'Backend & Java Client Developer',
     duration: 'July 2025',
     overviewBody:
-      "Our team's final project for ITCS 222L. Every client talks to one game server through a single CORBA interface (Game.idl) registered with the CORBA Naming Service, so Java and Python clients can play against each other. I built the Java game server — login and sessions, matchmaking, timed rounds, guess checking, wins and leaderboards, admin player management and game settings, all stored in MySQL — and the Java client, a Swing app with the login screen, lobby, live game view, leaderboard and a tabbed admin panel.",
+      "Our team's final project for Computer Programming 3 (ITCS 222L). Every client talks to one game server through a single CORBA interface (Game.idl) registered with the CORBA Naming Service, so Java and Python clients can play against each other. I built the Java game server — login and sessions, matchmaking, timed rounds, guess checking, wins and leaderboards, admin player management and game settings, all stored in MySQL — and the Java client, a Swing app with the login screen, lobby, live game view, leaderboard and a tabbed admin panel.",
     keyFeatures: [
       'One CORBA interface shared by a Java server and both Java and Python clients',
       'Matchmaking lobby, a countdown, and timed rounds that end on a winner or a timeout',
