@@ -175,6 +175,7 @@ const PROJECTS = [
     outcome:
       'Delivered a production-ready desktop application covering the full lifecycle — requirements, architecture, development, and deployment — with zero client-side installation friction.',
     galleryLabel: 'UI Design',
+    mediaNote: "There's no screen recording of this project: it's a client commission, so I can't record or share the working app. These are the UI designs instead.",
     cover: 'assets/ecosolergy/02-draft-proposal.png',
     gallery: ['01-home', '02-draft-proposal', '03-database'].map((f) => `assets/ecosolergy/${f}.png`),
   },
