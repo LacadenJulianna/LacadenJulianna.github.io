@@ -14,87 +14,73 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%2710%27 fill=%27%233b5bfd%27/%3E%3Ctext x=%2716%27 y=%2721%27 font-family=%27Arial%27 font-weight=%27700%27 font-style=%27italic%27 font-size=%2714%27 fill=%27white%27 text-anchor=%27middle%27%3EJL%3C/text%3E%3C/svg%3E" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%276%27 fill=%27%23238636%27/%3E%3Ctext x=%2716%27 y=%2721%27 font-family=%27Arial%27 font-weight=%27700%27 font-size=%2714%27 fill=%27white%27 text-anchor=%27middle%27%3EJL%3C/text%3E%3C/svg%3E" />
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
-    <nav class="nav" id="nav" aria-label="Main">
-      <ul class="nav__links" id="nav-links">
-        <li><a href="#projects" data-section="projects">Projects</a></li>
-        <li><a href="#about" data-section="about">About</a></li>
-        <li><a href="#beyond" data-section="beyond">Beyond</a></li>
-      </ul>
-      <a class="nav__brand" href="#top">Julianna Lacaden</a>
-      <button class="nav__toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
-        <i data-lucide="menu" aria-hidden="true"></i>
-      </button>
-    </nav>
+    <header class="nav" id="nav"></header>
 
     <main class="page" id="top">
       <section class="hero" aria-label="Introduction">
-        <div class="card hero__main" data-accent="pink">
-          <p class="label label--pink">Available for projects</p>
-          <h1 class="hero__title">
-            <span class="line">Building systems that</span>
-            <span class="line"><span class="marker">quietly</span> get the work</span>
-            <span class="line"><span class="accent-italic">done.</span></span>
-          </h1>
+        <div class="hero__text">
+          <p class="label" id="hero-eyebrow"></p>
+          <h1 class="hero__title">Building systems that <em>quietly</em> get the work done.</h1>
           <p class="hero__bio" id="hero-bio"></p>
+          <div class="btns" id="hero-links"></div>
         </div>
-
-        <aside class="card profile" data-accent="blue" aria-label="Profile">
-          <div class="portrait" id="profile-portrait">
-            <div class="blob portrait__blob" id="profile-initials"></div>
-          </div>
-          <p class="profile__name" id="profile-name"></p>
-          <p class="label" id="profile-location"></p>
-          <div class="profile__links" id="profile-links"></div>
-        </aside>
+        <div class="hero__pic" id="hero-pic"></div>
       </section>
+      <dl class="facts" id="facts"></dl>
 
-      <section class="section" id="projects" data-accent="blue">
+      <section class="section" id="projects">
         <div class="section-head">
-          <h2>Selected Works</h2>
-          <span class="rule"></span>
-          <span class="label">02 / Gallery</span>
+          <h2>Selected work</h2>
+          <p class="label" id="projects-meta"></p>
         </div>
         <div class="works" id="works"></div>
       </section>
 
-      <section class="section about" id="about" data-accent="orange">
-        <div class="card">
-          <p class="label label--orange">03 / About me</p>
-          <p class="about__quote">
-            I build systems — from <span class="word">solar</span> proposal software to
-            <span class="marker marker--orange">AI agents.</span>
-          </p>
-          <div class="about__text" id="about-text"></div>
+      <section class="section" id="about">
+        <div class="section-head">
+          <h2>About</h2>
         </div>
-        <div class="card" data-accent="green">
-          <p class="label label--green">Technical toolkit</p>
-          <div class="toolkit" id="toolkit"></div>
-        </div>
-      </section>
-
-      <section class="section" id="beyond" data-accent="purple">
-        <div class="card beyond">
-          <div class="section-head">
-            <h2>Beyond Class</h2>
-            <span class="rule"></span>
-            <span class="label">04 / Timeline</span>
+        <article class="readme">
+          <div class="readme__bar">
+            <span class="readme__file">julianna / README.md</span>
+            <span id="readme-meta"></span>
           </div>
-          <ol class="timeline" id="timeline"></ol>
-        </div>
+          <div class="readme__body">
+            <div class="readme__photo" id="about-photo"></div>
+            <div>
+              <blockquote class="readme__quote">I build systems — from solar proposal software to AI agents.</blockquote>
+              <div class="readme__text" id="about-text"></div>
+            </div>
+          </div>
+          <div class="toolkit" id="toolkit"></div>
+        </article>
       </section>
 
-      <footer class="footer" data-accent="green">
-        <div>
-          <h2>Let's create.</h2>
-          <p class="label" id="footer-meta"></p>
+      <section class="section" id="beyond">
+        <div class="section-head">
+          <h2>Beyond class</h2>
+          <p class="label" id="beyond-meta"></p>
         </div>
-        <div class="footer__links" id="footer-links"></div>
-      </footer>
+        <div class="graph" id="graph"></div>
+        <ol class="ledger" id="timeline"></ol>
+      </section>
     </main>
+
+    <footer class="footer">
+      <div class="page">
+        <p class="label">Have something that needs building?</p>
+        <p class="footer__big">Let's talk. <a id="footer-email" href="#">Email me</a> ↗</p>
+        <div class="footer__bar">
+          <span id="footer-copy"></span>
+          <span class="footer__links" id="footer-links"></span>
+          <span id="footer-place"></span>
+        </div>
+      </div>
+    </footer>
 
     <script
       src="https://cdn.jsdelivr.net/npm/lucide@1.49.0/dist/umd/lucide.min.js"
@@ -102,6 +88,7 @@
       crossorigin="anonymous"
     ></script>
     <script src="js/data.js"></script>
+    <script src="js/logic.js"></script>
     <script src="js/ui.js"></script>
     <script src="js/home.js"></script>
   </body>
