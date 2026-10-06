@@ -6,84 +6,70 @@ function renderActivity() {
   const index = EXTRACURRICULAR.findIndex((a) => a.id === id);
   const total = EXTRACURRICULAR.length;
 
-  root.append(
-    el('div', { className: 'topbar' }, [
-      backLink('index.html#beyond', 'Back'),
-      index >= 0 ? el('span', { className: 'label label--yellow', text: `${pad2(index + 1)} / ${pad2(total)}` }) : null,
-    ])
-  );
+  renderNav({ current: 'beyond' });
+  root.append(crumb('index.html#beyond', 'Beyond class', index >= 0 ? pad2(index + 1) : ''));
 
   if (index < 0) {
     document.title = 'Activity not found — Julianna Lacaden';
     root.append(
-      el('div', { className: 'card not-found' }, [
-        el('p', { className: 'label label--pink', text: '404' }),
+      el('div', { className: 'not-found' }, [
+        el('p', { className: 'label', text: '404' }),
         el('h1', { text: 'Activity not found' }),
         el('p', { text: "That activity doesn't exist, or the link is missing part of its address." }),
-        backLink('index.html#beyond', 'Beyond Class'),
+        backLink('index.html#beyond', 'Beyond class'),
       ])
     );
     return;
   }
 
   const activity = EXTRACURRICULAR[index];
+  const win = isWin(activity);
   document.title = `${activity.title} — Julianna Lacaden`;
 
-  const tag = el('span', { className: 'label', text: activity.tag });
-  tag.style.color = TAG_COLORS[activity.tag] || 'var(--muted)';
-
-  const headText = [tag, el('h1', { text: activity.title }), el('span', { className: 'badge activity-badge', text: activity.result })];
-  // Events with a banner show it full-width at the top of the card, title underneath.
-  const header = activity.banner
-    ? el('header', { className: 'card detail-head detail-head--banner' }, [
-        el('img', { className: 'detail-head__banner', attrs: { src: activity.banner, alt: `${activity.title} banner` } }),
-        el('div', { className: 'detail-head__body' }, headText),
-      ])
-    : el('header', { className: 'card detail-head' }, headText);
-
-  const meta = el('aside', { className: 'meta' }, [
-    el('dl', {}, [el('dt', { className: 'label', text: 'Where' }), el('dd', { text: activity.org })]),
-    el('dl', {}, [el('dt', { className: 'label', text: 'Time' }), el('dd', { text: activity.date })]),
+  const header = el('header', { className: 'detail-head' }, [
+    el('p', { className: 'label', text: activity.tag }),
+    el('h1', { text: activity.title }),
+    el('span', { className: `chip${win ? ' chip--win' : ''}`, text: win ? `🏆 ${activity.result}` : activity.result }),
+  ]);
+  const banner = activity.banner
+    ? el('div', { className: 'detail-banner' }, [el('img', { attrs: { src: activity.banner, alt: `${activity.title} banner` } })])
+    : null;
+  const meta = metaList([
+    ['Where', activity.org],
+    ['When', activity.date],
+    ['Result', activity.result, win],
   ]);
 
   const project = PROJECTS.find((p) => p.id === activity.project);
-
   const content = el('div', { className: 'content' }, [
-    activity.description
-      ? el('section', {}, [
-          el('span', { className: 'label label--yellow', text: 'What' }),
-          el('p', { className: 'lead', text: activity.description }),
-        ])
-      : null,
+    activity.description ? block('What', [el('p', { className: 'lead', text: activity.description })]) : null,
     project
-      ? el('section', {}, [
-          el('span', { className: 'label label--yellow', text: 'Project' }),
+      ? block('Project', [
           el('p', { text: project.title }),
-          el('a', { className: 'pill-btn', attrs: { href: `project.html?id=${project.id}` } }, [
-            el('span', { text: 'See project' }),
-            icon('arrow-up-right'),
+          el('div', { className: 'btns' }, [
+            el('a', { className: 'btn btn--primary', attrs: { href: `project.html?id=${project.id}` } }, [
+              el('span', { text: 'See project' }),
+              icon('arrow-up-right'),
+            ]),
           ]),
         ])
       : null,
     activity.images
-      ? el('section', {}, [
-          el('span', { className: 'label label--yellow', text: activity.images.length > 1 ? 'Pictures' : 'Picture' }),
-          renderGallery(activity.images, `${activity.title} picture`),
-        ])
+      ? block(activity.images.length > 1 ? 'Pictures' : 'Picture', [renderGallery(activity.images, `${activity.title} picture`)])
       : null,
   ]);
 
   const next = EXTRACURRICULAR[(index + 1) % total];
   const pager = el('nav', { className: 'pager', attrs: { 'aria-label': 'Activity navigation' } }, [
-    backLink('index.html#beyond', 'Beyond Class'),
+    backLink('index.html#beyond', 'Beyond class'),
     el('a', { className: 'pager__next', attrs: { href: `activity.html?id=${next.id}` } }, [
       el('span', { className: 'label', text: 'Next →' }),
       el('strong', { text: next.title }),
     ]),
   ]);
 
-  root.append(header, el('div', { className: 'detail-body' }, [meta, content]), pager);
-  reveal(root.querySelectorAll('.detail-head, .meta, .content > section, .pager'));
+  root.append(...[header, banner, meta, content, pager].filter(Boolean)); // append(null) would print "null"
+  reveal(root.querySelectorAll('.detail-head, .detail-banner, .meta, .block, .pager'));
 }
 
 renderActivity();
