@@ -12,6 +12,9 @@
  *   cover       (optional) image for the homepage card; defaults to gallery[0]
  *   repoUrl     (optional) adds a "View on GitHub" link
  *   liveUrl     (optional) adds a "View live site" link
+ *   period      (optional) { from: 'YYYY-MM', to: 'YYYY-MM' } for the Beyond Class
+ *               activity graph; `to` can be left out for a single month
+ *   lang        (optional) label for the language dot, if techStack has no language
  */
 
 const PROFILE = {
@@ -24,6 +27,8 @@ const PROFILE = {
   course: 'BS Computer Science',
   school: 'Saint Louis University',
   bio: 'BS Computer Science student at Saint Louis University. Building software across web, desktop, and agentic AI systems.',
+  focus: 'Backend · AI', // facts strip under the hero
+  status: 'Open to work', // facts strip; leave '' to hide it
 };
 
 const ABOUT = {
@@ -53,10 +58,12 @@ const SKILLS = [
  *               first photo, or the banner if there are no photos
  *   project     (optional) id of a PROJECTS entry; adds a "Project" link to it.
  *               Hidden until a project with that id exists
+ *   period      (optional) same as on projects; feeds the activity graph
  */
 const EXTRACURRICULAR = [
   {
     id: 'next-gen-2026',
+    period: { from: '2026-09' },
     year: '2026',
     date: 'September 18–20, 2026',
     tag: 'Hackathon',
@@ -98,6 +105,7 @@ const EXTRACURRICULAR = [
   },
   {
     id: 'amd-hackathon',
+    period: { from: '2026-07' },
     year: '2026',
     date: 'July 2026',
     tag: 'Hackathon',
@@ -121,6 +129,7 @@ const EXTRACURRICULAR = [
   },
   {
     id: 'civil-service',
+    period: { from: '2025-08' },
     year: '2025',
     date: 'August 2025',
     tag: 'License',
@@ -131,6 +140,7 @@ const EXTRACURRICULAR = [
   },
   {
     id: 'rainwatt-smart-city',
+    period: { from: '2025-11' },
     year: '2025',
     date: 'November 2025',
     tag: 'Competition',
@@ -153,6 +163,7 @@ const EXTRACURRICULAR = [
 const PROJECTS = [
   {
     id: 'ecosolergy',
+    period: { from: '2026-04', to: '2026-06' },
     title: 'EcoSolergy Proposal & Inventory System',
     category: 'Desktop System',
     year: 2026,
@@ -181,6 +192,7 @@ const PROJECTS = [
   },
   {
     id: 'seo-audit-skill',
+    period: { from: '2026-06', to: '2026-07' },
     title: 'Agentic SEO/AEO/GEO Audit Skill',
     category: 'AI / Agentic System',
     year: 2026,
@@ -205,6 +217,7 @@ const PROJECTS = [
   },
   {
     id: 'token-gate',
+    period: { from: '2026-07' },
     title: 'Token Gate — AMD Developer Hackathon',
     category: 'Hackathon Project',
     year: 2026,
@@ -241,6 +254,7 @@ const PROJECTS = [
   },
   {
     id: 'aim-ready',
+    period: { from: '2026-09' },
     title: "ARCHIVe — Team AI'm Ready, The Next Gen 2026",
     category: 'Hackathon Project',
     year: 2026,
@@ -283,6 +297,7 @@ const PROJECTS = [
   },
   {
     id: 'paybach',
+    period: { from: '2025-11', to: '2025-12' },
     title: 'Paybach: Bidding & Swapping Marketplace',
     category: 'Marketplace Platform',
     year: 2025,
@@ -320,6 +335,7 @@ const PROJECTS = [
   },
   {
     id: 'lab-reservation',
+    period: { from: '2025-11', to: '2025-12' },
     title: 'Laboratory Reservation System',
     category: 'Academic System',
     year: 2025,
@@ -357,6 +373,7 @@ const PROJECTS = [
   },
   {
     id: 'rainwatt',
+    lang: 'Hardware', // no code, so the language dot says Hardware
     title: 'RainWatt: Rain-Powered Micro-Hydropower',
     category: 'Sustainability Project',
     year: 2025,
@@ -393,6 +410,7 @@ const PROJECTS = [
   },
   {
     id: 'babel',
+    period: { from: '2026-01' },
     title: 'Babel: An Arcane History — Book Companion Site',
     category: 'Web Design Project',
     year: 2026,
