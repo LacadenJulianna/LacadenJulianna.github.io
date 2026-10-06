@@ -40,8 +40,9 @@ const PROFILE = {
 const ABOUT = {
   photo: 'assets/profile/about.jpg', // optional; round photo in the About README card
   paragraphs: [
-    "I'm a fourth-year BS Computer Science student at Saint Louis University in Baguio City. My work spans full-stack web systems, desktop applications, and increasingly, agentic AI tooling.",
-    "Recently, I was the sole developer behind EcoSolergy, a zero-install WPF desktop app for solar proposal management, and an AI Engineering Intern building agentic SEO/AEO/GEO audit skills and NLP classifiers. I've also competed in the AMD Developer Hackathon and the Smart City Convergence 2025, where our team placed 1st Runner-Up.",
+    "I'm a fourth-year Computer Science student at Saint Louis University in Baguio City, and I like the unglamorous parts of software: the backup that never silently fails, the database that stays consistent, the test that catches the bug before a user does. Most of my work sits on the backend and, more and more, in agentic AI.",
+    "My favourite project so far was built for a real client. As the sole developer of EcoSolergy, I built a solar engineering business a portable desktop app that runs off a USB stick, manages their inventory and generates their Excel proposals, and I handled everything from requirements to deployment. Since then I've built agentic SEO audit tools and NLP classifiers as an AI Engineering Intern, and fixed the bug that took our AMD Hackathon router from 75% to 100% accuracy.",
+    "On teams I'm usually the one wiring the backend together, and I'm careful to be clear about which parts were mine. Outside code I've handled budgets and records as a student-org officer, and I've placed 1st Runner-Up at Smart City Convergence 2025 and The Next Gen 2026. I'm open to work where reliability matters as much as features.",
   ],
 };
 
